@@ -3,7 +3,7 @@
 <html lang="es">
     <head>
         <%@ include file="../parts/meta.jsp" %>
-        <title>ProyectoDUAL</title>
+        <title>Inicio de sesión - ProyectoDUAL</title>
         <%@ include file="../parts/header.jsp" %>
     </head>
     <body class="container-fluid row">
