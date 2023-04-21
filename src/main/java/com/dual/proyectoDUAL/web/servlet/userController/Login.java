@@ -1,4 +1,4 @@
-package com.dual.proyectoDUAL.servlet.userController;
+package com.dual.proyectoDUAL.web.servlet.userController;
 
 import com.dual.proyectoDUAL.dto.Usuario;
 

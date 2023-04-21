@@ -1,4 +1,4 @@
-package com.dual.proyectoDUAL.servlet;
+package com.dual.proyectoDUAL.web.servlet;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
