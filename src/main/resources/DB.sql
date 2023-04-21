@@ -47,7 +47,9 @@ CREATE TABLE post(
     id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
     id_user int NOT NULL,
     message text NOT NULL,
+    id_servicio int,
     create_at DATE NOT NULL,
 
-    CONSTRAINT fk_id_user FOREIGN KEY (id_user) REFERENCES usuario(id)
+    CONSTRAINT fk_id_user FOREIGN KEY (id_user) REFERENCES usuario(id),
+    CONSTRAINT fk_id_servicio FOREIGN KEY (id_servicio) REFERENCES servicio(id)
 );
