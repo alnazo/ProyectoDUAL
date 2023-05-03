@@ -6,7 +6,7 @@
         <title>Inicio de sesión - ProyectoDUAL</title>
         <%@ include file="../parts/header.jsp" %>
     </head>
-    <body class="container-fluid row">
+    <body class="container-fluid p-0">
         <%@ include file="../parts/nav.jsp" %>
         <div class="container text-center col-md-6">
             <form action="login" method="POST">
