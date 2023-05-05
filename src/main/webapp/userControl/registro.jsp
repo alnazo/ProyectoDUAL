@@ -26,8 +26,12 @@
                     <label for="confirm_password" class="form-label">Repetir password:</label>
                     <input type="password" class="form-control" id="confirm_password" name="confirm_password">
                 </div>
+                <div class="mb-3">
+                    <label for="nacimiento" class="form-label">Fecha de nacimiento:</label>
+                    <input type="date" class="form-control" id="nacimiento" name="nacimiento">
+                </div>
                 <%if(request.getAttribute("error")!=null){%>
-                    <div style="color: red"><%=request.getAttribute("error")%></div>
+                    <div style="color: red" class="mb-3"><%=request.getAttribute("error")%></div>
                 <%}%>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>

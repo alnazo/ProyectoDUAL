@@ -19,7 +19,7 @@ CREATE TABLE servicio(
 );
 
 CREATE TABLE grupo(
-    id int PRIMARY KEY AUTO_INCREMENT;
+    id int PRIMARY KEY AUTO_INCREMENT,
     servicio int NOT NULL,
     user1 int NOT NULL,
     user2 int NOT NULL,
