@@ -1,0 +1,26 @@
+:root {
+  --back-color: #81899b;
+  --primary-color: #f9ffee;
+  --header-back: #1a1d24;
+  --header-text: #eee;
+}
+
+body {
+  background-color: var(--back-color) !important;
+  color: var(--primary-color) !important;
+}
+
+nav {
+    background-color: var(--header-back) !important;
+    & * {
+        color: var(--header-text) !important;
+    }
+}
+
+.link > *, .link:hover > *{
+     color: var(--primary-color) !important;
+ }
+
+ #errorMsg {
+    color: black;
+ }

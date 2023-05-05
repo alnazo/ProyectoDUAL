@@ -6,7 +6,7 @@
         <title>Registro - ProyectoDUAL</title>
         <%@ include file="../parts/header.jsp" %>
     </head>
-    <body class="container-fluid">
+    <body class="container-fluid p-0">
         <%@ include file="../parts/nav.jsp" %>
         <div class="container text-center">
             <form action="registro" method="POST">
@@ -33,7 +33,7 @@
                 <%if(request.getAttribute("error")!=null){%>
                     <div style="color: red" class="mb-3"><%=request.getAttribute("error")%></div>
                 <%}%>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary">Registro</button>
             </form>
         </div>
         <%@ include file="../parts/footer.jsp" %>

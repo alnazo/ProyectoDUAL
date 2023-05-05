@@ -1,0 +1,22 @@
+:root {
+  --back-color: #eee;
+  --primary-color: #000000;
+  --header-back: #5d5d5d;
+  --header-text: #eee;
+}
+
+body {
+  background-color: var(--back-color) !important;
+  color: var(--primary-color) !important;
+}
+
+nav {
+    background-color: var(--header-back) !important;
+    & * {
+        color: var(--header-text) !important;
+    }
+}
+
+.link > *, .link:hover > *{
+     color: var(--primary-color) !important;
+}

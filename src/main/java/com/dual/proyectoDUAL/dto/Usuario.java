@@ -31,9 +31,9 @@ public class Usuario {
         }
     }
 
-    private boolean isAdmin(int admin){
+    public boolean isAdmin(){
         boolean res = false;
-        if(admin == 1){
+        if(this.admin == 1){
             res = true;
         }
         return res;
