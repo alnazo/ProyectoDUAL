@@ -4,9 +4,10 @@ USE proyectodual;
 
 CREATE TABLE usuario(
     id int PRIMARY KEY AUTO_INCREMENT,
-    usuario varchar(32) NOT NULL,
+    usuario varchar(32) NOT NULL UNIQUE,
     pass varchar(64) NOT NULL,
-    email varchar(64) NOT NULL,
+    email varchar(64) NOT NULL UNIQUE,
+    img_perfil varchar(64),
     nacimiento DATE, -- YYYY-MM-DD
     admin int(1) NOT NULL -- 0/1
 );
