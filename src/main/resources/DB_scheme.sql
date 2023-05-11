@@ -44,7 +44,7 @@ CREATE TABLE grupo(
 -- TWITTER
 CREATE TABLE tablon(
     id int PRIMARY KEY AUTO_INCREMENT,
-    mensage varchar(144) NOT NULL,
+    mensaje varchar(144) NOT NULL,
     id_user int NOT NULL,
     likes int NOT NULL DEFAULT 0,
     create_at DATETIME NOT NULL,

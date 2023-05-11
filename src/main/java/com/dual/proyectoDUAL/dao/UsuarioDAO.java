@@ -13,22 +13,22 @@ public class UsuarioDAO {
         this.connection = connection;
     }
 
-    public void insertarUsuario(Usuario usuario) {
+    public List<Usuario> obtenerTodoUsuario() {
+        List<Usuario> usuarios = new ArrayList<>();
         try {
-            PreparedStatement statement = connection.prepareStatement(
-                    "INSERT INTO usuario (username, password, email, admin) VALUES (?, ?, ?, ?)"
-            );
-            statement.setString(1, usuario.getUsername());
-            statement.setString(2, usuario.getPassword());
-            statement.setString(3, usuario.getEmail());
-            statement.setBoolean(4, usuario.isAdmin());
-            statement.executeUpdate();
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM usuario");
+            while (resultSet.next()) {
+                Usuario usuario = new Usuario(resultSet);
+                usuarios.add(usuario);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return usuarios;
     }
 
-    public Usuario obtenerUsuario(int id) {
+    public Usuario obtenerUsuarioPorId(int id) {
         Usuario usuario = null;
         try {
             PreparedStatement statement = connection.prepareStatement(
@@ -45,31 +45,33 @@ public class UsuarioDAO {
         return usuario;
     }
 
-    public List<Usuario> obtenerTodosLosUsuarios() {
-        List<Usuario> usuarios = new ArrayList<>();
+    public void insertarUsuario(Usuario usuario) {
         try {
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM usuario");
-            while (resultSet.next()) {
-                Usuario usuario = new Usuario(resultSet);
-                usuarios.add(usuario);
-            }
+            PreparedStatement statement = connection.prepareStatement(
+                    "INSERT INTO usuario (usuario, pass, email, nacimiento, admin) VALUES (?, ?, ?, ?, ?)"
+            );
+            statement.setString(1, usuario.getUsername());
+            statement.setString(2, usuario.getPassword());
+            statement.setString(3, usuario.getEmail());
+            statement.setDate(4, Date.valueOf(usuario.getNacimiento()));
+            statement.setInt(5, usuario.isAdmin() ? 1 : 0);
+            statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return usuarios;
     }
 
     public void actualizarUsuario(Usuario usuario) {
         try {
             PreparedStatement statement = connection.prepareStatement(
-                    "UPDATE usuario SET username = ?, password = ?, email = ?, admin = ? WHERE id = ?"
+                    "UPDATE usuario SET usuario = ?, pass = ?, email = ?, nacimiento = ?, admin = ? WHERE id = ?"
             );
             statement.setString(1, usuario.getUsername());
             statement.setString(2, usuario.getPassword());
             statement.setString(3, usuario.getEmail());
-            statement.setBoolean(4, usuario.isAdmin());
-            statement.setInt(5, usuario.getId());
+            statement.setDate(4, Date.valueOf(usuario.getNacimiento()));
+            statement.setInt(5, usuario.isAdmin() ? 1 : 0);
+            statement.setInt(6, usuario.getId());
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
