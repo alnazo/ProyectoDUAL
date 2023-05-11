@@ -8,9 +8,12 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 @WebServlet(name = "Registro", urlPatterns = "/registro")
 public class Registro extends HttpServlet {
@@ -30,10 +33,13 @@ public class Registro extends HttpServlet {
             req.setAttribute("error", "Error, faltan datos por rellenar.");
             req.getRequestDispatcher("/userControl/registro.jsp").forward(req, resp);
         }else if (passwordIntroducido.equals(req.getParameter("confirm_password"))) {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            LocalDate nacimientoIntroducidoFormat = LocalDate.parse(nacimientoIntroducido, formatter);
-
-            Usuario newUser = new Usuario(1, usuarioIntroducido, passwordIntroducido, emailIntroducido, Date.valueOf(nacimientoIntroducidoFormat), 0);
+            Date date = null;
+            try {
+                date = new SimpleDateFormat("yyyy-MM-dd").parse(nacimientoIntroducido.toString());
+            } catch (ParseException e) {
+                throw new RuntimeException(e);
+            }
+            Usuario newUser = new Usuario(1, usuarioIntroducido, passwordIntroducido, emailIntroducido, null, date, Boolean.FALSE);
             //TODO -- send newUser to DB
 
         } else {

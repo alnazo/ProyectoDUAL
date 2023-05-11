@@ -28,3 +28,16 @@ function setTheme(theme) {
     style = localStorage.getItem('style');
   }
 }
+
+$( function() {
+    $("#nacimiento").datepicker({
+        todayBtn: true,
+        todayHighlight: true,
+        clearBtn: true,
+        language: "es",
+   });
+
+});
+
+
+

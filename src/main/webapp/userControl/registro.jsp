@@ -28,7 +28,14 @@
                 </div>
                 <div class="mb-3">
                     <label for="nacimiento" class="form-label">Fecha de nacimiento:</label>
-                    <input type="date" class="form-control" id="nacimiento" name="nacimiento">
+                    <div class="input-group date" id="nacimiento">
+                        <input type="text" class="form-control" name="nacimiento" placeholder="Fecha de nacimiento" />
+                        <span class="input-group-append">
+                            <span class="input-group-text bg-light d-block">
+                                <i class="fa fa-calendar"></i>
+                            </span>
+                        </span>
+                    </div>
                 </div>
                 <%if(request.getAttribute("error")!=null){%>
                     <div style="color: red" class="mb-3"><%=request.getAttribute("error")%></div>

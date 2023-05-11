@@ -1,42 +1,45 @@
 package com.dual.proyectoDUAL.dto;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Builder;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@ToString
+@Getter
+@Setter
 public class Usuario {
-    private int id;
+    private Integer id;
     private String username;
     private String password;
     private String email;
+    private String imagen;
     private Date nacimiento;
-    private int admin;
+    private Boolean admin;
 
-    public Usuario(ResultSet result){
-        try{
+    public Usuario(ResultSet result) {
+        try {
             this.id = result.getInt("id");
             this.username = result.getString("username");
             this.password = result.getString("password");
             this.email = result.getString("email");
+            this.imagen = result.getString("img_perfil");
             this.nacimiento = result.getDate("nacimiento");
-            this.admin = result.getInt("admin");
-        } catch (SQLException e){
+            this.admin = result.getBoolean("admin");
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public boolean isAdmin(){
-        boolean res = false;
-        if(this.admin == 1){
-            res = true;
-        }
-        return res;
-    }
-
 }
+
+

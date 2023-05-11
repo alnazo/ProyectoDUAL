@@ -17,22 +17,21 @@
             Usuario usuario = (Usuario)session.getAttribute("usuarioSesion");
           %>
             <div class="dropdown dropstart">
-              <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Menu
+              <button class="btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Hola <%= usuario.getUsername() %>
               </button>
               <ul class="dropdown-menu">
-                <li><div class="dropdown-item">Hola <%= usuario.getUsername() %></div></li>
                 <li><a class="dropdown-item" href="perfil">Perfil</a></li>
-                <% if (usuario.isAdmin()) { %>
+                <% if (usuario.getAdmin()) { %>
                     <li><a class="dropdown-item" href="admin">Administracion</a></li>
                 <% } %>
                 <li><a class="dropdown-item" href="disconnect">Desconectar</a></li>
               </ul>
             </div>
-          <% } else { %>
+          <%} else {%>
             <a href="login"><button class="btn">Inicio de sesión</button></a>
             <a href="registro"><button class="btn">Registrar</button></a>
-          <% } %>
+          <%}%>
       </div>
     </div>
   <button class="btn" id="switch-style" type="button"></button>

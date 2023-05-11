@@ -1,4 +1,5 @@
 <%@ page pageEncoding="UTF-8" %>
+
 <!DOCTYPE html>
 <html lang="es">
     <head>
@@ -9,17 +10,16 @@
     <body class="container-fluid p-0">
         <%@ include file="/parts/nav.jsp" %>
         <div class="container">
-
             <div class="post row">
-                <div class="col-3 imgperfil">
+                <div class="col-2 imgperfil">
                     <img src="" alt="imgprerfil" class="perfilimg"/>
                 </div>
-                <div class="row col-9">
+                <div class="row col-10">
                     <div class="row col-12 datainfo">
                         <div class="sublink">
                             <a href="" class="mainlink">usuario</a>
                             <a href="">@usuario</a>
-                            ·
+                            <spam>·<spam>
                             <a href="">1d</a>
                         </div>
                     </div>

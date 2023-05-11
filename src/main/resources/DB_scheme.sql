@@ -9,7 +9,7 @@ CREATE TABLE usuario(
     email varchar(64) NOT NULL UNIQUE,
     img_perfil varchar(64),
     nacimiento DATE, -- YYYY-MM-DD
-    admin int(1) NOT NULL -- 0/1
+    admin BOOL NOT NULL -- 0/1
 );
 
 CREATE TABLE servicio(
