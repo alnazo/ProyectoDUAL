@@ -20,3 +20,8 @@ nav {
 .link > *, .link:hover > *{
      color: var(--primary-color) !important;
 }
+
+.post {
+    background-color: #5A4DA1;
+    border: 2px solid gray;
+}

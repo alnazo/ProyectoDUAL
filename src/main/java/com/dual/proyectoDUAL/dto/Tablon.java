@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
 
 @Data
 @Builder
@@ -17,17 +17,17 @@ public class Tablon {
 
     private int id;
     private String mensaje;
-    private int id_user;
+    private Usuario id_user;
     private int likes;
-    private LocalDateTime createdAt;
+    private Timestamp createdAt;
 
     public Tablon(ResultSet result){
         try {
             this.id = result.getInt("id");
             this.mensaje = result.getString("mensaje");
-            this.id_user = result.getInt("id_user");
+            this.id_user = new Usuario(result);
             this.likes = result.getInt("likes");
-            this.createdAt = result.getTimestamp("create_at").toLocalDateTime();
+            this.createdAt = result.getTimestamp("create_at");
         } catch (SQLException e){
             e.printStackTrace();
         }

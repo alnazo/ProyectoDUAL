@@ -24,3 +24,8 @@ nav {
  #errorMsg {
     color: black;
  }
+
+ .post {
+     background-color: #382A74;
+     border: 2px solid gray;
+ }

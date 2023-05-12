@@ -1,11 +1,6 @@
 package com.dual.proyectoDUAL.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Builder;
-import lombok.ToString;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
