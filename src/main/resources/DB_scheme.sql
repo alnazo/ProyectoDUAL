@@ -48,6 +48,6 @@ CREATE TABLE tablon(
     mensage varchar(144) NOT NULL,
     id_user int NOT NULL,
     likes int NOT NULL DEFAULT 0,
-    create_at DATETIME NOT NULL,
+    create_at TIMESTAMP(6) NOT NULL,
     CONSTRAINT FK_id_user FOREIGN KEY (id_user) REFERENCES usuario(id)
 );

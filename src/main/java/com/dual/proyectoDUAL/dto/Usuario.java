@@ -1,10 +1,11 @@
 package com.dual.proyectoDUAL.dto;
 
+import jakarta.json.bind.annotation.JsonbDateFormat;
 import lombok.*;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Date;
+import java.time.LocalDate;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -18,7 +19,7 @@ public class Usuario {
     private String password;
     private String email;
     private String imagen;
-    private Date nacimiento;
+    private LocalDate nacimiento;
     private Boolean admin;
 
     public Usuario(ResultSet result) {
@@ -28,7 +29,7 @@ public class Usuario {
             this.password = result.getString("password");
             this.email = result.getString("email");
             this.imagen = result.getString("img_perfil");
-            this.nacimiento = result.getDate("nacimiento");
+            this.nacimiento = result.getDate("nacimiento").toLocalDate();
             this.admin = result.getBoolean("admin");
         } catch (SQLException e) {
             e.printStackTrace();

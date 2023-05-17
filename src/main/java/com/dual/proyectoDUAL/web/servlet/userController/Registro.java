@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 
 @WebServlet(name = "Registro", urlPatterns = "/registro")
@@ -30,12 +31,8 @@ public class Registro extends HttpServlet {
             req.setAttribute("error", "Error, faltan datos por rellenar.");
             req.getRequestDispatcher("/userControl/registro.jsp").forward(req, resp);
         }else if (passwordIntroducido.equals(req.getParameter("confirm_password"))) {
-            Date date = null;
-            try {
-                date = new SimpleDateFormat("yyyy-MM-dd").parse(nacimientoIntroducido.toString());
-            } catch (ParseException e) {
-                throw new RuntimeException(e);
-            }
+            LocalDate date = LocalDate.parse(nacimientoIntroducido);
+
             Usuario newUser = new Usuario(1, usuarioIntroducido, passwordIntroducido, emailIntroducido, null, date, Boolean.FALSE);
             //TODO -- send newUser to DB
 
