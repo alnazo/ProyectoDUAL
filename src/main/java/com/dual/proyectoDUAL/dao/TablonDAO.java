@@ -10,9 +10,11 @@ import jakarta.ws.rs.client.ClientBuilder;
 import jakarta.ws.rs.client.WebTarget;
 import jakarta.ws.rs.core.MediaType;
 
-import java.util.Comparator;
-import java.util.Set;
-import java.util.TreeSet;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TablonDAO {
 
@@ -23,17 +25,23 @@ public class TablonDAO {
         this.webTarget = client.target("http://localhost:8081/ProyectoDualWebService/api/tablon/");
     }
 
-    public Set<Tablon> findAll() throws JsonProcessingException {
+    public List<Tablon> findAll() throws JsonProcessingException {
         String path = "getall";
         String json = webTarget.path(path).request(MediaType.APPLICATION_JSON).get(String.class);
 
-        Set<Tablon> tablones = new TreeSet<>(Comparator.comparing(Tablon::getCreatedAt).reversed());
+        List<Tablon> tablones = new ArrayList<>();
         if (json.length() > 4) {
             ObjectMapper mapper = new ObjectMapper();
             mapper.registerModule(new JavaTimeModule());
-            CollectionType setType = mapper.getTypeFactory().constructCollectionType(Set.class, Tablon.class);
+            CollectionType setType = mapper.getTypeFactory().constructCollectionType(List.class, Tablon.class);
             tablones = mapper.readValue(json, setType);
 
+            for (Tablon tablon : tablones) {
+                Timestamp timestamp = tablon.getCreatedAt();
+                LocalDateTime localDateTime = timestamp.toLocalDateTime().minusHours(2);
+                Timestamp adjustedTimestamp = Timestamp.valueOf(localDateTime.atOffset(ZoneOffset.UTC).toLocalDateTime());
+                tablon.setCreatedAt(adjustedTimestamp);
+            }
 
         } else {
             tablones = null;
@@ -41,9 +49,4 @@ public class TablonDAO {
         return tablones;
     }
 
-
-    private String removeUTCTimestamp(String json) {
-
-        return null;
-    }
 }

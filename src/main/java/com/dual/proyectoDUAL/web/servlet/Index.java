@@ -11,9 +11,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.util.Set;
+import java.util.List;
 
-@WebServlet(name="Index", urlPatterns = {"/home", ""})
+@WebServlet(name = "Index", urlPatterns = {"/home", ""})
 public class Index extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -21,7 +21,7 @@ public class Index extends HttpServlet {
         req.getSession().setAttribute("usuarioSesion", new UsuarioDAO().getUsuario(1));
         //Forzado de que exista un usuario
 
-        Set<Tablon> tablon = new TablonDAO().findAll();
+        List<Tablon> tablon = new TablonDAO().findAll();
         req.getSession().setAttribute("tablon", tablon);
 
         req.getRequestDispatcher("/index.jsp").forward(req, res);

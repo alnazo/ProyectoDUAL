@@ -1,8 +1,27 @@
-.navbar-toggler-icon {
-  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E") !important;
+html, body {
+    height: 100%;
+    margin: 0;
 }
-.navbar-toggler:focus {
-    box-shadow: none !important;
+
+.menu {
+    position: relative;
+    min-height: 100vh;
+    height: 100%;
+}
+
+.top-section {
+    padding: 20px;
+}
+
+.down-section {
+    position: absolute;
+    bottom: 0;
+    padding: 20px;
+}
+
+.content {
+    height: 100%;
+    padding: 20px;
 }
 
 .mainlinlk {
@@ -10,8 +29,59 @@
     font-weight: bold !important;
 }
 .sublink {
-    color: #999999 !important;
     & a {
+        color: #999999;
         text-decoration: none !important;
     }
+}
+
+.iconos li a{
+    position: relative;
+    display: inline-block;
+}
+
+.text-hover {
+    position: absolute;
+    display: none;
+    left: 100%;
+    top: 0;
+    padding: 5px;
+    -webkit-animation: text-hover 0.8s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
+    animation: text-hover 0.8s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
+}
+
+.iconos li a:hover .text-hover {
+    display: block;
+    -webkit-animation: text-hover 0.8s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
+    animation: text-hover 0.8s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
+}
+
+/*
+    KeyFrames
+*/
+@-webkit-keyframes text-hover {
+  0% {
+    letter-spacing: 1em;
+    opacity: 0;
+  }
+  40% {
+    opacity: 0.6;
+  }
+  100% {
+    letter-spacing: normal;
+    opacity: 1;
+  }
+}
+@keyframes text-hover {
+  0% {
+    letter-spacing: 1em;
+    opacity: 0;
+  }
+  40% {
+    opacity: 0.6;
+  }
+  100% {
+    letter-spacing: normal;
+    opacity: 1;
+  }
 }

@@ -10,7 +10,7 @@ body {
   color: var(--primary-color) !important;
 }
 
-nav {
+.menu {
     background-color: var(--header-back) !important;
     & * {
         color: var(--header-text) !important;
