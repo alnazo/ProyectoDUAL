@@ -63,7 +63,7 @@ public class Tablon {
             time = annio + "Y";
         }
 
-        return time;
+        return "Hace: "+time;
     }
 
 

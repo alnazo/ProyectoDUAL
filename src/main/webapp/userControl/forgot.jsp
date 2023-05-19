@@ -20,6 +20,6 @@
                 <div style="color: red"><%=request.getAttribute("error")%></div>
             <%}%>
         </div>
-        <%@ include file="../parts/footer.jsp" %>
     </body>
+    <%@ include file="../parts/footer.jsp" %>
 </html>

@@ -1,4 +1,7 @@
 <%@ page pageEncoding="UTF-8" %>
+<%
+    ServletContext context = (ServletContext) session.getAttribute("servletContext");
+%>
 <!DOCTYPE html>
 <html lang="es">
     <head>
@@ -43,6 +46,6 @@
                 <button type="submit" class="btn btn-primary">Registro</button>
             </form>
         </div>
-        <%@ include file="../parts/footer.jsp" %>
     </body>
+    <%@ include file="../parts/footer.jsp" %>
 </html>

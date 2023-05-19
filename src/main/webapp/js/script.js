@@ -17,12 +17,12 @@ switcher.addEventListener('click', function(){
 
 function setTheme(theme) {
   if (theme == 'light') {
-    document.getElementById('switcher-id').href = 'css/light.css';
+    document.getElementById('switcher-id').href = '/css/light.css';
     switcher.innerText = "☀️";
     localStorage.setItem('style', 'light');
     style = localStorage.getItem('style');
   } else if (theme == 'dark') {
-    document.getElementById('switcher-id').href = 'css/dark.css';
+    document.getElementById('switcher-id').href = '/css/dark.css';
     switcher.innerText = "🌙";
     localStorage.setItem('style', 'dark');
     style = localStorage.getItem('style');

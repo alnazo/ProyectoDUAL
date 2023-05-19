@@ -1,6 +1,7 @@
 package com.dual.proyectoDUAL.web.servlet.userController;
 
 import com.dual.proyectoDUAL.dto.Usuario;
+import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;

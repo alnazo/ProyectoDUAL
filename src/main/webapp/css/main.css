@@ -35,6 +35,26 @@ html, body {
     }
 }
 
+.imgperfil {
+    width-max: 100%;
+    height-max: 100%;
+    border-radius: 50%;
+    padding: 5px 0px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    & .perfilimg {
+        height: 75px;
+        width: 75px;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 5px solid gray;
+    }
+}
+
+/* Animacion Menu principal */
+
 .iconos li a{
     position: relative;
     display: inline-block;

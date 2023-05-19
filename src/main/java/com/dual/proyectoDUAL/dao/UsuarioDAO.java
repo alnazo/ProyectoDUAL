@@ -22,5 +22,12 @@ public class UsuarioDAO {
                 .get(Usuario.class);
     }
 
+    public Usuario findByNombreExacto(String nombre){
+        String path = "get/nombreExacto/"+nombre;
+        return webTarget.path(path)
+                .request(MediaType.APPLICATION_JSON)
+                .get(Usuario.class);
+    }
+
 
 }
