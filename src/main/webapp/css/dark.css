@@ -1,0 +1,31 @@
+:root {
+  --back-color: #81899b;
+  --primary-color: #f9ffee;
+  --header-back: #1a1d24;
+  --header-text: #eee;
+}
+
+body {
+  background-color: var(--back-color) !important;
+  color: var(--primary-color) !important;
+}
+
+.menu {
+    background-color: var(--header-back) !important;
+    & * {
+        color: var(--header-text) !important;
+    }
+}
+
+.link > *, .link:hover > *{
+     color: var(--primary-color) !important;
+ }
+
+ #errorMsg {
+    color: black;
+ }
+
+ .post {
+     background-color: #382A74;
+     border: 2px solid gray;
+ }

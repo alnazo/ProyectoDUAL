@@ -1,12 +1,13 @@
 package com.dual.proyectoDUAL.web.servlet.userController;
 
 import com.dual.proyectoDUAL.dto.Usuario;
+import jakarta.servlet.ServletContext;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet(name="Login", urlPatterns = "/login")
@@ -18,40 +19,34 @@ public class Login extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Usuario usuario = (Usuario) req.getSession().getAttribute("usuarioSesion");
 
-        if (usuario != null) {
-            homePage(resp, usuario);
-        } else {
-            String emailConfigurado=getServletContext().getInitParameter("email");
-            String passwordConfigurado=getServletContext().getInitParameter("password");
+        String emailIntroducido = req.getParameter("email");
+        String passwordIntroducido = req.getParameter("password");
+        String rememberSession = req.getParameter("remember");
 
-            String emailIntroducido = req.getParameter("email");
-            String passwordIntroducido = req.getParameter("password");
-            String rememberSession = req.getParameter("remember");
+        Usuario user = new Usuario();
+        //TODO -- buscar usuario en base de datos y traer informacion para comprobacion de login
 
-            if ((emailIntroducido != null && emailIntroducido.equals(emailConfigurado)) && (passwordIntroducido != null && passwordIntroducido.equals(passwordConfigurado))) {
-                usuario = Usuario.builder().email(emailIntroducido).password(passwordIntroducido).build();
+        String emailuser = user.getEmail();
+        String passworduser = user.getPassword();
 
-                if(rememberSession != null){
-                    req.getSession().setMaxInactiveInterval(-1);
-                } else {
-                    req.getSession().setMaxInactiveInterval(Integer.parseInt(req.getServletContext().getInitParameter("sessionTimeout")));
-                }
-                req.getSession().setAttribute("usuarioSesion", usuario);
-                resp.sendRedirect("home");
+
+        if ((emailIntroducido != null && emailIntroducido.equals(emailuser)) && (passwordIntroducido != null && passwordIntroducido.equals(passworduser))) {
+
+            if(rememberSession != null){
+                req.getSession().setMaxInactiveInterval(-1);
+            } else {
+                req.getSession().setMaxInactiveInterval(Integer.parseInt(req.getServletContext().getInitParameter("sessionTimeout")));
             }
-            else {
-                req.setAttribute("error","Error al insertar el correo o la contraseña");
-                req.getRequestDispatcher("/userControl/login.jsp").forward(req, resp);
-            }
+            req.getSession().setAttribute("usuarioSesion", user);
+            resp.sendRedirect("home");
+        }
+        else {
+            req.setAttribute("error","Error al insertar el correo o la contraseña");
+            req.getRequestDispatcher("/userControl/login.jsp").forward(req, resp);
         }
 
-    }
-
-    private void homePage(HttpServletResponse resp, Usuario usuario) throws IOException {
 
     }
-
 
 }

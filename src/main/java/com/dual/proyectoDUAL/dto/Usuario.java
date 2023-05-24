@@ -1,39 +1,52 @@
 package com.dual.proyectoDUAL.dto;
 
+import jakarta.servlet.ServletContext;
 import lombok.*;
 
+import java.io.File;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
-@Data
-@Builder
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@ToString
+@Getter
+@Setter
 public class Usuario {
-    private int id;
+    private Integer id;
     private String username;
     private String password;
     private String email;
-    private boolean admin;
+    private String imagen;
+    private LocalDate nacimiento;
+    private Boolean admin;
 
-    public Usuario(ResultSet result){
-        try{
+    public Usuario(ResultSet result) {
+        try {
             this.id = result.getInt("id");
             this.username = result.getString("username");
             this.password = result.getString("password");
             this.email = result.getString("email");
-            this.admin = this.isAdmin(result.getInt("admin"));
-        } catch (SQLException e){
+            this.imagen = result.getString("img_perfil");
+            this.nacimiento = result.getDate("nacimiento").toLocalDate();
+            this.admin = result.getBoolean("admin");
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    private boolean isAdmin(int admin){
-        boolean res = false;
-        if(admin == 1){
-            res = true;
+    public String sourceImagen(ServletContext servletContext) {
+        String file = servletContext.getRealPath("/img/usuarios/" + this.id + "/" + this.imagen);
+        if (file != null && new File(file).exists() && this.imagen != null) {
+            return "img/usuarios/" + this.id + "/" + this.imagen;
+        } else {
+            return null;
         }
-        return res;
+
     }
 
 }
+
+

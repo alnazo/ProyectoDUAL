@@ -4,11 +4,12 @@ USE proyectodual;
 
 CREATE TABLE usuario(
     id int PRIMARY KEY AUTO_INCREMENT,
-    usuario varchar(32) NOT NULL,
+    usuario varchar(32) NOT NULL UNIQUE,
     pass varchar(64) NOT NULL,
-    email varchar(64) NOT NULL,
+    email varchar(64) NOT NULL UNIQUE,
+    img_perfil varchar(64),
     nacimiento DATE, -- YYYY-MM-DD
-    admin int(1) NOT NULL -- 0/1
+    admin BOOL NOT NULL -- 0/1
 );
 
 CREATE TABLE servicio(
@@ -19,7 +20,7 @@ CREATE TABLE servicio(
 );
 
 CREATE TABLE grupo(
-    id int PRIMARY KEY AUTO_INCREMENT;
+    id int PRIMARY KEY AUTO_INCREMENT,
     servicio int NOT NULL,
     user1 int NOT NULL,
     user2 int NOT NULL,
@@ -47,6 +48,6 @@ CREATE TABLE tablon(
     mensage varchar(144) NOT NULL,
     id_user int NOT NULL,
     likes int NOT NULL DEFAULT 0,
-    create_at DATETIME NOT NULL,
+    create_at TIMESTAMP(6) NOT NULL,
     CONSTRAINT FK_id_user FOREIGN KEY (id_user) REFERENCES usuario(id)
 );

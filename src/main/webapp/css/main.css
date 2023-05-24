@@ -1,0 +1,107 @@
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+.menu {
+    position: relative;
+    min-height: 100vh;
+    height: 100%;
+}
+
+.top-section {
+    padding: 20px;
+}
+
+.down-section {
+    position: absolute;
+    bottom: 0;
+    padding: 20px;
+}
+
+.content {
+    height: 100%;
+    padding: 20px;
+}
+
+.mainlinlk {
+    color: white !important;
+    font-weight: bold !important;
+}
+.sublink {
+    & a {
+        color: #999999;
+        text-decoration: none !important;
+    }
+}
+
+.imgperfil {
+    width-max: 100%;
+    height-max: 100%;
+    border-radius: 50%;
+    padding: 5px 0px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    & .perfilimg {
+        height: 75px;
+        width: 75px;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 5px solid gray;
+    }
+}
+
+/* Animacion Menu principal */
+
+.iconos li a{
+    position: relative;
+    display: inline-block;
+}
+
+.text-hover {
+    position: absolute;
+    display: none;
+    left: 100%;
+    top: 0;
+    padding: 5px;
+    -webkit-animation: text-hover 0.8s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
+    animation: text-hover 0.8s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
+}
+
+.iconos li a:hover .text-hover {
+    display: block;
+    -webkit-animation: text-hover 0.8s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
+    animation: text-hover 0.8s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
+}
+
+/*
+    KeyFrames
+*/
+@-webkit-keyframes text-hover {
+  0% {
+    letter-spacing: 1em;
+    opacity: 0;
+  }
+  40% {
+    opacity: 0.6;
+  }
+  100% {
+    letter-spacing: normal;
+    opacity: 1;
+  }
+}
+@keyframes text-hover {
+  0% {
+    letter-spacing: 1em;
+    opacity: 0;
+  }
+  40% {
+    opacity: 0.6;
+  }
+  100% {
+    letter-spacing: normal;
+    opacity: 1;
+  }
+}
