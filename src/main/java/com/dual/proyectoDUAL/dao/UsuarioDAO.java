@@ -12,18 +12,18 @@ public class UsuarioDAO {
 
     public UsuarioDAO(){
         Client client = ClientBuilder.newClient();
-        this.webTarget = client.target("http://localhost:8081/ProyectoDualWebService/api/usuarios/");
+        this.webTarget = client.target("http://localhost:8081/api/usuarios/");
     }
 
     public Usuario getUsuario(int id){
-        String path = "get/"+id;
+        String path = id+"/get";
         return webTarget.path(path)
                 .request(MediaType.APPLICATION_JSON)
                 .get(Usuario.class);
     }
 
     public Usuario findByNombreExacto(String nombre){
-        String path = "get/nombreExacto/"+nombre;
+        String path = nombre+"/getn";
         return webTarget.path(path)
                 .request(MediaType.APPLICATION_JSON)
                 .get(Usuario.class);

@@ -22,11 +22,11 @@ public class TablonDAO {
 
     public TablonDAO() {
         Client client = ClientBuilder.newClient();
-        this.webTarget = client.target("http://localhost:8081/ProyectoDualWebService/api/tablon/");
+        this.webTarget = client.target("http://localhost:8081/api/tablones/");
     }
 
     public List<Tablon> findAll() throws JsonProcessingException {
-        String path = "getall";
+        String path = "getAll";
         String json = webTarget.path(path).request(MediaType.APPLICATION_JSON).get(String.class);
 
         List<Tablon> tablones = new ArrayList<>();
@@ -37,10 +37,10 @@ public class TablonDAO {
             tablones = mapper.readValue(json, setType);
 
             for (Tablon tablon : tablones) {
-                Timestamp timestamp = tablon.getCreatedAt();
+                Timestamp timestamp = tablon.getCreateAt();
                 LocalDateTime localDateTime = timestamp.toLocalDateTime().minusHours(2);
                 Timestamp adjustedTimestamp = Timestamp.valueOf(localDateTime.atOffset(ZoneOffset.UTC).toLocalDateTime());
-                tablon.setCreatedAt(adjustedTimestamp);
+                tablon.setCreateAt(adjustedTimestamp);
             }
 
         } else {
@@ -50,7 +50,7 @@ public class TablonDAO {
     }
 
     public List<Tablon> findByUserId(int id) throws JsonProcessingException{
-        String path = "getallUser/"+id;
+        String path = id+"/getAllUser";
         String json = webTarget.path(path).request(MediaType.APPLICATION_JSON).get(String.class);
 
         List<Tablon> tablones = new ArrayList<>();
@@ -61,10 +61,10 @@ public class TablonDAO {
             tablones = mapper.readValue(json, setType);
 
             for (Tablon tablon : tablones) {
-                Timestamp timestamp = tablon.getCreatedAt();
+                Timestamp timestamp = tablon.getCreateAt();
                 LocalDateTime localDateTime = timestamp.toLocalDateTime().minusHours(2);
                 Timestamp adjustedTimestamp = Timestamp.valueOf(localDateTime.atOffset(ZoneOffset.UTC).toLocalDateTime());
-                tablon.setCreatedAt(adjustedTimestamp);
+                tablon.setCreateAt(adjustedTimestamp);
             }
 
         } else {
@@ -76,17 +76,17 @@ public class TablonDAO {
     public Tablon findById(int id) throws JsonProcessingException{
         Tablon tab = null;
 
-        String path = "get/"+id;
+        String path = id+"/get";
         String json = webTarget.path(path).request(MediaType.APPLICATION_JSON).get(String.class);
         if (json.length() > 4) {
             ObjectMapper mapper = new ObjectMapper();
             mapper.registerModule(new JavaTimeModule());
             tab = mapper.readValue(json, Tablon.class);
 
-            Timestamp timestamp = tab.getCreatedAt();
+            Timestamp timestamp = tab.getCreateAt();
             LocalDateTime localDateTime = timestamp.toLocalDateTime().minusHours(2);
             Timestamp adjustedTimestamp = Timestamp.valueOf(localDateTime.atOffset(ZoneOffset.UTC).toLocalDateTime());
-            tab.setCreatedAt(adjustedTimestamp);
+            tab.setCreateAt(adjustedTimestamp);
         }
 
         return tab;

@@ -29,8 +29,8 @@ ServletContext context = (ServletContext) session.getAttribute("servletContext")
                                 <div class="post row">
                                    <div class="col-1 imgperfil">
                                        <%
-                                       if (tab.getId_user().sourceImagen(context) != null){ %>
-                                            <img src="<%= tab.getId_user().sourceImagen(context) %>" alt="imgprerfil" class="perfilimg"/>
+                                       if (tab.getIdUsuario().sourceImagen(context) != null){ %>
+                                            <img src="<%= tab.getIdUsuario().sourceImagen(context) %>" alt="imgprerfil" class="perfilimg"/>
                                        <% } else { %>
                                             <i class="fas fa-user-circle fa-lg perfilimg"></i>
                                        <% } %>
@@ -38,14 +38,14 @@ ServletContext context = (ServletContext) session.getAttribute("servletContext")
                                    <div class="row col-11">
                                        <div class="row col-12 datainfo">
                                            <div class="sublink">
-                                               <a href="" class="mainlink"><%=tab.getId_user().getUsername()%></a>
-                                               <a href="" >@<%=tab.getId_user().getUsername()%></a>
+                                               <a href="" class="mainlink"><%=tab.getIdUsuario().getUsername()%></a>
+                                               <a href="" >@<%=tab.getIdUsuario().getUsername()%></a>
                                                <spam>·<spam>
-                                               <a href="/post/<%=tab.getId()%>" title="<%= tab.getCreatedAt() %>"><%= tab.timeAgo() %></a>
+                                               <a href="/post/<%=tab.getId()%>" title="<%= tab.getCreateAt() %>"><%= tab.timeAgo() %></a>
                                            </div>
                                        </div>
                                        <div class="col-12 message">
-                                           <%= tab.getMensaje() %>
+                                           <%= tab.getMessage() %>
                                        </div>
                                        <div class="col-12 sublink">
                                             <a href="">❤️<%= tab.getLikes() %></a>
