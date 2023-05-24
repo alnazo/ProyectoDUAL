@@ -2,7 +2,6 @@ package com.dual.proyectoDUAL.web.servlet;
 
 
 import com.dual.proyectoDUAL.dao.TablonDAO;
-import com.dual.proyectoDUAL.dao.UsuarioDAO;
 import com.dual.proyectoDUAL.dto.Tablon;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
@@ -18,12 +17,9 @@ import java.util.List;
 public class Index extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        //Forzado de que exista un usuario
-        req.getSession().setAttribute("usuarioSesion", new UsuarioDAO().getUsuario(1));
-        //Forzado de que exista un usuario
 
         ServletContext servletContext = getServletContext();
-        req.getSession().setAttribute("servletContext" ,servletContext);
+        req.getSession().setAttribute("servletContext", servletContext);
         List<Tablon> tablon = new TablonDAO().findAll();
         req.getSession().setAttribute("tablon", tablon);
 

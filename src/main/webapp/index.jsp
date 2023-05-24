@@ -48,7 +48,7 @@ ServletContext context = (ServletContext) session.getAttribute("servletContext")
                                            <%= tab.getMessage() %>
                                        </div>
                                        <div class="col-12 sublink">
-                                            <a href="">❤️<%= tab.getLikes() %></a>
+                                            <a id="<%= tab.getId() %>" href="">❤️<%= tab.getLikes() %></a>
                                        </div>
                                    </div>
                                </div>

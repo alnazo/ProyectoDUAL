@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -15,7 +16,7 @@ import java.util.Date;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Tablon {
+public class Tablon implements Serializable {
 
     private int id;
     private String message;
@@ -66,5 +67,8 @@ public class Tablon {
         return "Hace: " + time;
     }
 
+    public void upLike(int id){
+        System.out.println(id);
+    }
 
 }

@@ -29,5 +29,11 @@ public class UsuarioDAO {
                 .get(Usuario.class);
     }
 
+    public Usuario findByEmail(String email){
+        String path = email + "/getM";
+        return webTarget.path(path)
+                .request(MediaType.APPLICATION_JSON)
+                .get(Usuario.class);
+    }
 
 }
