@@ -9,7 +9,7 @@ public class GrupoDAO {
     private final WebTarget webTarget;
     public GrupoDAO(){
         Client client = ClientBuilder.newClient();
-        this.webTarget = client.target("http://localhost:8081/ProyectoDualWebService/api/grupos/");
+        this.webTarget = client.target("http://localhost:8081/api/grupos/");
     }
 
 

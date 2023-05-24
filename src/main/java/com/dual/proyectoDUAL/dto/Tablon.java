@@ -18,19 +18,19 @@ import java.util.Date;
 public class Tablon {
 
     private int id;
-    private String mensaje;
-    private Usuario id_user;
+    private String message;
+    private Usuario idUsuario;
     private int likes;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'")
-    private Timestamp createdAt;
+    private Timestamp createAt;
 
     public Tablon(ResultSet result) {
         try {
             this.id = result.getInt("id");
-            this.mensaje = result.getString("mensaje");
-            this.id_user = new Usuario(result);
+            this.message = result.getString("mensaje");
+            this.idUsuario = new Usuario(result);
             this.likes = result.getInt("likes");
-            this.createdAt = Timestamp.valueOf(result.getString("create_at"));
+            this.createAt = Timestamp.valueOf(result.getString("create_at"));
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -38,7 +38,7 @@ public class Tablon {
 
     public String timeAgo() {
         Date now = new Date();
-        Date ob = new Date(this.createdAt.getTime());
+        Date ob = new Date(this.createAt.getTime());
         long dif = now.getTime() - ob.getTime();
 
         long seg = dif / 1000;
@@ -63,7 +63,7 @@ public class Tablon {
             time = annio + "Y";
         }
 
-        return "Hace: "+time;
+        return "Hace: " + time;
     }
 
 

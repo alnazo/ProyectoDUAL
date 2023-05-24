@@ -9,7 +9,7 @@ public class ServicioDAO {
     private final WebTarget webTarget;
     public ServicioDAO(){
         Client client = ClientBuilder.newClient();
-        this.webTarget = client.target("http://localhost:8081/ProyectoDualWebService/api/servicios/");
+        this.webTarget = client.target("http://localhost:8081/api/servicios/");
     }
 
 
