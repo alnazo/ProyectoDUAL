@@ -21,6 +21,14 @@ body {
      color: var(--primary-color) !important;
  }
 
+.imgdefault{
+    color: black;
+}
+
+.card-body {
+    background-color: #959595;
+}
+
  #errorMsg {
     color: black;
  }

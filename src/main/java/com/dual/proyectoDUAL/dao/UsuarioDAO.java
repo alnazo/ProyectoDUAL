@@ -3,6 +3,7 @@ package com.dual.proyectoDUAL.dao;
 import com.dual.proyectoDUAL.dto.Usuario;
 import jakarta.ws.rs.client.Client;
 import jakarta.ws.rs.client.ClientBuilder;
+import jakarta.ws.rs.client.Entity;
 import jakarta.ws.rs.client.WebTarget;
 import jakarta.ws.rs.core.MediaType;
 
@@ -34,6 +35,13 @@ public class UsuarioDAO {
         return webTarget.path(path)
                 .request(MediaType.APPLICATION_JSON)
                 .get(Usuario.class);
+    }
+
+    public Usuario register(Usuario user){
+        String path = "/add";
+        return webTarget.path(path)
+                .request(MediaType.APPLICATION_JSON)
+                .post(Entity.entity(user, MediaType.APPLICATION_JSON), Usuario.class);
     }
 
 }

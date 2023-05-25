@@ -2,7 +2,6 @@ package com.dual.proyectoDUAL.web.servlet.userController;
 
 import com.dual.proyectoDUAL.dao.UsuarioDAO;
 import com.dual.proyectoDUAL.dto.Usuario;
-import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -11,7 +10,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet(name="Login", urlPatterns = "/login")
+@WebServlet(name = "Login", urlPatterns = "/login")
 public class Login extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -27,29 +26,23 @@ public class Login extends HttpServlet {
 
         Usuario getUser = new UsuarioDAO().findByEmail(emailIntroducido);
 
-
-        Usuario user = new Usuario();
-
-        String emailuser = user.getEmail();
-        String passworduser = user.getPassword();
-
-
-        if ((emailIntroducido != null && emailIntroducido.equals(emailuser)) && (passwordIntroducido != null && passwordIntroducido.equals(passworduser))) {
-
-            if(rememberSession != null){
-                req.getSession().setMaxInactiveInterval(-1);
+        if (getUser != null) {
+            if (getUser.getPassword().equals(passwordIntroducido)) {
+                if (rememberSession != null) {
+                    req.getSession().setMaxInactiveInterval(-1);
+                } else {
+                    req.getSession().setMaxInactiveInterval(Integer.parseInt(req.getServletContext().getInitParameter("sessionTimeout")));
+                }
+                req.getSession().setAttribute("usuarioSesion", getUser);
+                resp.sendRedirect("home");
             } else {
-                req.getSession().setMaxInactiveInterval(Integer.parseInt(req.getServletContext().getInitParameter("sessionTimeout")));
+                req.setAttribute("error", "Error al insertar la contraseña");
+                req.getRequestDispatcher("/userControl/login.jsp").forward(req, resp);
             }
-            req.getSession().setAttribute("usuarioSesion", user);
-            resp.sendRedirect("home");
-        }
-        else {
-            req.setAttribute("error","Error al insertar el correo o la contraseña");
+        } else {
+            req.setAttribute("error", "Error, el correo introducido no existe");
             req.getRequestDispatcher("/userControl/login.jsp").forward(req, resp);
         }
-
-
     }
 
 }

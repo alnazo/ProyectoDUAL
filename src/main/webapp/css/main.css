@@ -6,7 +6,10 @@ html, body {
 .menu {
     position: relative;
     min-height: 100vh;
-    height: 100%;
+}
+.sub-menu {
+    position: fixed;
+    height: 100vh;
 }
 
 .top-section {

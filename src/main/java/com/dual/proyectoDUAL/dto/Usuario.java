@@ -4,6 +4,7 @@ import jakarta.servlet.ServletContext;
 import lombok.*;
 
 import java.io.File;
+import java.io.InputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -14,7 +15,7 @@ import java.time.LocalDate;
 @ToString
 @Getter
 @Setter
-public class Usuario {
+public class Usuario{
     private Integer id;
     private String username;
     private String password;
@@ -40,7 +41,7 @@ public class Usuario {
     public String sourceImagen(ServletContext servletContext) {
         String file = servletContext.getRealPath("/img/usuarios/" + this.id + "/" + this.imagen);
         if (file != null && new File(file).exists() && this.imagen != null) {
-            return "img/usuarios/" + this.id + "/" + this.imagen;
+            return "/img/usuarios/" + this.id + "/" + this.imagen;
         } else {
             return null;
         }
