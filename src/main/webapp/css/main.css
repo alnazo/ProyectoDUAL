@@ -56,6 +56,13 @@ html, body {
     }
 }
 
+.post, .publicar {
+    border-radius: 20px;
+}
+
+.publicar button {
+    margin-top: 5px;
+}
 /* Animacion Menu principal */
 
 .iconos li a{

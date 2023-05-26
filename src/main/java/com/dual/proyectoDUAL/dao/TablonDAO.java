@@ -1,12 +1,14 @@
 package com.dual.proyectoDUAL.dao;
 
 import com.dual.proyectoDUAL.dto.Tablon;
+import com.dual.proyectoDUAL.dto.Usuario;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.CollectionType;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import jakarta.ws.rs.client.Client;
 import jakarta.ws.rs.client.ClientBuilder;
+import jakarta.ws.rs.client.Entity;
 import jakarta.ws.rs.client.WebTarget;
 import jakarta.ws.rs.core.MediaType;
 
@@ -66,6 +68,13 @@ public class TablonDAO {
         }
 
         return tab;
+    }
+
+    public Tablon send(Tablon tab) throws JsonProcessingException {
+        String path = "/add";
+        return webTarget.path(path)
+                .request(MediaType.APPLICATION_JSON)
+                .post(Entity.entity(tab, MediaType.APPLICATION_JSON), Tablon.class);
     }
 
 }
