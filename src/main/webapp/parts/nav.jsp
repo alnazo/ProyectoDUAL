@@ -8,7 +8,10 @@
                 <a class="nav-link ps-0" aria-current="page" href="/home"><i class="fas fa-home fa-lg"></i> <span class="text-hover">Inicio</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link ps-0" aria-current="page" href="/busqueda"><i class="fas fa-search fa-lg"></i> <span class="text-hover">Busqueda</span></a>
+                <a class="nav-link ps-0" aria-current="page" href="/servicios"><i class="fas fa-search fa-lg"></i> <span class="text-hover">Servicios</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link ps-0" aria-current="page" href="/grupos"><i class="fas fa-users fa-lg"></i> <span class="text-hover">Grupos</span></a>
             </li>
         </ul>
     </div>
@@ -23,7 +26,7 @@
                         <div class="accordion-body">
                             <ul class="nav flex-column">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="/perfil">Perfil</a>
+                                    <a class="nav-link" href="/user/@<%=usuario.getUsername()%>">Perfil</a>
                                 </li>
                                 <% if (usuario.getAdmin()) { %>
                                 <li class="nav-item">

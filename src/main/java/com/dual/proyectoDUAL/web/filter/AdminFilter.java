@@ -23,7 +23,7 @@ public class AdminFilter implements Filter {
         Usuario usuario = (Usuario)req.getSession().getAttribute("usuarioSesion");
 
         if (usuario == null || !usuario.getAdmin()) {
-            ((HttpServletResponse)servletResponse).sendRedirect("login");
+            ((HttpServletResponse)servletResponse).sendRedirect("/login");
         } else {
             filterChain.doFilter(servletRequest, servletResponse);
         }
