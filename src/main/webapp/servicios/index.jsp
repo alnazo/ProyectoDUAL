@@ -26,18 +26,25 @@ List<Servicio> servicios = (List<Servicio>) session.getAttribute("servicios");
                 <div class="container">
                     <%
                     if (servicios != null){
-                        for (Servicio servicio : servicios){
-
                     %>
-                    <div class="card" style="width: 18rem;">
-                      <div class="card-body">
-                        <h5 class="card-title"><%= servicio.getNombre() %> - <%= servicio.getPlan()%></h5>
-                        <p class="card-text">Precio: <%=servicio.getPrecio()%></p>
-                        <a href="#" class="btn btn-primary">Buscar grupo</a>
-                      </div>
-                    </div>
-                    <% } } else { %>
-                    <div> No hay Servicios disponibles</div>
+                        <div class="row row-cols-2 row-cols-lg-4 g-4">
+                            <%
+                                for (Servicio servicio : servicios){
+                            %>
+                                <div class="col">
+                                    <div class="card">
+                                      <div class="card-body">
+                                        <h4 class="card-title"><%= servicio.getNombre() %> </h4>
+                                        <h5 class="card-tittle"><%= servicio.getPlan()%> </h5>
+                                        <p class="card-text">Precio: <%=servicio.getPrecio()%></p>
+                                        <a href="/grupos/<%= servicio.getId() %>" class="btn btn-primary">Buscar grupo</a>
+                                      </div>
+                                    </div>
+                                </div>
+                            <% } %>
+                        </div>
+                    <% } else { %>
+                        <div> No hay Servicios disponibles</div>
                     <% } %>
                 </div>
             </div>
