@@ -22,7 +22,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-10">
-                            <div class="post row">
+                            <div class="post row mt-2 mb-2 pt-2 pb-2">
                                <div class="col-1 imgperfil">
                                    <%
                                    if (tab.getIdUsuario().sourceImagen(context) != null){ %>
@@ -34,8 +34,8 @@
                                <div class="row col-11">
                                    <div class="row col-12 datainfo">
                                        <div class="sublink">
-                                           <a href="" class="mainlink"><%=tab.getIdUsuario().getUsername()%></a>
-                                           <a href="" >@<%=tab.getIdUsuario().getUsername()%></a>
+                                           <a href="/user/@<%= tab.getIdUsuario().getUsername()%>" class="mainlink"><%=tab.getIdUsuario().getUsername()%></a>
+                                           <a href="/user/@<%= tab.getIdUsuario().getUsername()%>" >@<%=tab.getIdUsuario().getUsername()%></a>
                                            <spam>·<spam>
                                            <a title="<%= tab.getCreateAt() %>"><%= tab.timeAgo() %></a>
                                        </div>

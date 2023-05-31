@@ -40,7 +40,7 @@ public class Usuario {
     public String sourceImagen(ServletContext servletContext) {
         String file = servletContext.getRealPath("/img/usuarios/" + this.id + "/" + this.imagen);
         if (file != null && new File(file).exists() && this.imagen != null) {
-            return "img/usuarios/" + this.id + "/" + this.imagen;
+            return "/img/usuarios/" + this.id + "/" + this.imagen;
         } else {
             return null;
         }

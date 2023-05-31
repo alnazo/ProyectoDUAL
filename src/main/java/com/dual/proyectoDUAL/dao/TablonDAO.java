@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.type.CollectionType;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import jakarta.ws.rs.client.Client;
 import jakarta.ws.rs.client.ClientBuilder;
+import jakarta.ws.rs.client.Entity;
 import jakarta.ws.rs.client.WebTarget;
 import jakarta.ws.rs.core.MediaType;
 
@@ -51,8 +52,8 @@ public class TablonDAO {
         return tablones;
     }
 
-    public List<Tablon> findByUserId(int id) throws JsonProcessingException{
-        String path = id+"/getAllUser";
+    public List<Tablon> findByUserId(int id) throws JsonProcessingException {
+        String path = id + "/getAllUser";
         String json = webTarget.path(path).request(MediaType.APPLICATION_JSON).get(String.class);
 
         List<Tablon> tablones = new ArrayList<>();
@@ -76,10 +77,10 @@ public class TablonDAO {
         return tablones;
     }
 
-    public Tablon findById(int id) throws JsonProcessingException{
+    public Tablon findById(int id) throws JsonProcessingException {
         Tablon tab = null;
 
-        String path = id+"/get";
+        String path = id + "/get";
         String json = webTarget.path(path).request(MediaType.APPLICATION_JSON).get(String.class);
         if (json.length() > 4) {
             ObjectMapper mapper = new ObjectMapper();
@@ -93,6 +94,13 @@ public class TablonDAO {
         }
 
         return tab;
+    }
+
+    public Tablon send(Tablon tab) throws JsonProcessingException {
+        String path = "/add";
+        return webTarget.path(path)
+                .request(MediaType.APPLICATION_JSON)
+                .post(Entity.entity(tab, MediaType.APPLICATION_JSON), Tablon.class);
     }
 
 }

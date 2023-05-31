@@ -18,11 +18,12 @@ public class Servicio {
     private String plan;
     private double precio;
     private String web;
+
     public Servicio(ResultSet result){
         try {
             this.id = result.getInt("id");
             this.nombre = result.getString("nombre");
-            this.plan= result.getString("plan");
+            this.plan = result.getString("plan");
             this.precio = result.getDouble("precio");
             this.web = result.getString("web");
         } catch (SQLException e){
