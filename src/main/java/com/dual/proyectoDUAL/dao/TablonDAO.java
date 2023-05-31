@@ -10,9 +10,6 @@ import jakarta.ws.rs.client.ClientBuilder;
 import jakarta.ws.rs.client.WebTarget;
 import jakarta.ws.rs.core.MediaType;
 
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,15 +33,14 @@ public class TablonDAO {
             CollectionType setType = mapper.getTypeFactory().constructCollectionType(List.class, Tablon.class);
             tablones = mapper.readValue(json, setType);
 
-
         } else {
             tablones = null;
         }
         return tablones;
     }
 
-    public List<Tablon> findByUserId(int id) throws JsonProcessingException{
-        String path = id+"/getAllUser";
+    public List<Tablon> findByUserId(int id) throws JsonProcessingException {
+        String path = id + "/getAllUser";
         String json = webTarget.path(path).request(MediaType.APPLICATION_JSON).get(String.class);
 
         List<Tablon> tablones = new ArrayList<>();
@@ -54,17 +50,16 @@ public class TablonDAO {
             CollectionType setType = mapper.getTypeFactory().constructCollectionType(List.class, Tablon.class);
             tablones = mapper.readValue(json, setType);
 
-
         } else {
             tablones = null;
         }
         return tablones;
     }
 
-    public Tablon findById(int id) throws JsonProcessingException{
+    public Tablon findById(int id) throws JsonProcessingException {
         Tablon tab = null;
 
-        String path = id+"/get";
+        String path = id + "/get";
         String json = webTarget.path(path).request(MediaType.APPLICATION_JSON).get(String.class);
         if (json.length() > 4) {
             ObjectMapper mapper = new ObjectMapper();

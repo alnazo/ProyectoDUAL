@@ -37,6 +37,7 @@ public class UsuarioDAO {
                 .get(Usuario.class);
     }
 
+
     public List<Usuario> findAll() throws JsonProcessingException{
         String path="getAll";
         String json = webTarget.path(path).request(MediaType.APPLICATION_JSON).get(String.class);
@@ -54,5 +55,12 @@ public class UsuarioDAO {
         return usuarios;
     }
 
+
+    public Usuario findByEmail(String email){
+        String path = email + "/getM";
+        return webTarget.path(path)
+                .request(MediaType.APPLICATION_JSON)
+                .get(Usuario.class);
+    }
 
 }

@@ -1,5 +1,6 @@
 package com.dual.proyectoDUAL.web.servlet.userController;
 
+import com.dual.proyectoDUAL.dao.UsuarioDAO;
 import com.dual.proyectoDUAL.dto.Usuario;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
@@ -24,8 +25,10 @@ public class Login extends HttpServlet {
         String passwordIntroducido = req.getParameter("password");
         String rememberSession = req.getParameter("remember");
 
+        Usuario getUser = new UsuarioDAO().findByEmail(emailIntroducido);
+
+
         Usuario user = new Usuario();
-        //TODO -- buscar usuario en base de datos y traer informacion para comprobacion de login
 
         String emailuser = user.getEmail();
         String passworduser = user.getPassword();
