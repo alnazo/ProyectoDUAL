@@ -1,18 +1,10 @@
 package com.dual.proyectoDUAL.dao;
 
-import com.dual.proyectoDUAL.dto.Tablon;
 import com.dual.proyectoDUAL.dto.Usuario;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.type.CollectionType;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import jakarta.ws.rs.client.Client;
 import jakarta.ws.rs.client.ClientBuilder;
 import jakarta.ws.rs.client.WebTarget;
 import jakarta.ws.rs.core.MediaType;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class UsuarioDAO {
 
@@ -35,23 +27,6 @@ public class UsuarioDAO {
         return webTarget.path(path)
                 .request(MediaType.APPLICATION_JSON)
                 .get(Usuario.class);
-    }
-
-    public List<Usuario> findAll() throws JsonProcessingException{
-        String path="getAll";
-        String json = webTarget.path(path).request(MediaType.APPLICATION_JSON).get(String.class);
-
-        List<Usuario> usuarios = new ArrayList<>();
-        if (json.length() > 4) {
-            ObjectMapper mapper = new ObjectMapper();
-            mapper.registerModule(new JavaTimeModule());
-            CollectionType setType = mapper.getTypeFactory().constructCollectionType(List.class, Usuario.class);
-            usuarios = mapper.readValue(json, setType);
-
-        } else {
-            usuarios = null;
-        }
-        return usuarios;
     }
 
 
