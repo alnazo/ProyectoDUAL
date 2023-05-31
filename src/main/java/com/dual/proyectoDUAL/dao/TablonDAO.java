@@ -36,12 +36,6 @@ public class TablonDAO {
             CollectionType setType = mapper.getTypeFactory().constructCollectionType(List.class, Tablon.class);
             tablones = mapper.readValue(json, setType);
 
-            for (Tablon tablon : tablones) {
-                Timestamp timestamp = tablon.getCreateAt();
-                LocalDateTime localDateTime = timestamp.toLocalDateTime().minusHours(2);
-                Timestamp adjustedTimestamp = Timestamp.valueOf(localDateTime.atOffset(ZoneOffset.UTC).toLocalDateTime());
-                tablon.setCreateAt(adjustedTimestamp);
-            }
 
         } else {
             tablones = null;
@@ -60,12 +54,6 @@ public class TablonDAO {
             CollectionType setType = mapper.getTypeFactory().constructCollectionType(List.class, Tablon.class);
             tablones = mapper.readValue(json, setType);
 
-            for (Tablon tablon : tablones) {
-                Timestamp timestamp = tablon.getCreateAt();
-                LocalDateTime localDateTime = timestamp.toLocalDateTime().minusHours(2);
-                Timestamp adjustedTimestamp = Timestamp.valueOf(localDateTime.atOffset(ZoneOffset.UTC).toLocalDateTime());
-                tablon.setCreateAt(adjustedTimestamp);
-            }
 
         } else {
             tablones = null;
@@ -82,11 +70,6 @@ public class TablonDAO {
             ObjectMapper mapper = new ObjectMapper();
             mapper.registerModule(new JavaTimeModule());
             tab = mapper.readValue(json, Tablon.class);
-
-            Timestamp timestamp = tab.getCreateAt();
-            LocalDateTime localDateTime = timestamp.toLocalDateTime().minusHours(2);
-            Timestamp adjustedTimestamp = Timestamp.valueOf(localDateTime.atOffset(ZoneOffset.UTC).toLocalDateTime());
-            tab.setCreateAt(adjustedTimestamp);
         }
 
         return tab;

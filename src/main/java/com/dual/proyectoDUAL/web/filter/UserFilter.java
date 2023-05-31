@@ -23,7 +23,7 @@ public class UserFilter implements Filter {
         Usuario usuario = (Usuario)req.getSession().getAttribute("usuarioSesion");
 
         if (usuario != null) {
-            ((HttpServletResponse)servletResponse).sendRedirect("home");
+            ((HttpServletResponse)servletResponse).sendRedirect("/home");
         } else {
             filterChain.doFilter(servletRequest, servletResponse);
         }

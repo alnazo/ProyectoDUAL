@@ -21,14 +21,7 @@
                             <div class="col-md-10">
                                 <h2>Administración</h2>
                             </div>
-                            <div class="col-md-2 text-center">
-                                <div>
-                                    OTROS
-                                </div>
-                                <div>
-                                    SERVICIOS
-                                </div>
-                            </div>
+
                         </div>
                     </div>
                 </div>
