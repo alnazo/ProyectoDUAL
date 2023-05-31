@@ -8,7 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebFilter(filterName = "FiltoAdmin", urlPatterns = { "/admin/*" }, dispatcherTypes = { DispatcherType.REQUEST, DispatcherType.FORWARD })
+@WebFilter(filterName = "FiltroAdmin", urlPatterns = { "/admin/*" }, dispatcherTypes = { DispatcherType.REQUEST, DispatcherType.FORWARD })
 public class AdminFilter implements Filter {
 
     @Override
@@ -23,7 +23,7 @@ public class AdminFilter implements Filter {
         Usuario usuario = (Usuario)req.getSession().getAttribute("usuarioSesion");
 
         if (usuario == null || !usuario.getAdmin()) {
-            ((HttpServletResponse)servletResponse).sendRedirect("login");
+            ((HttpServletResponse)servletResponse).sendRedirect("/login");
         } else {
             filterChain.doFilter(servletRequest, servletResponse);
         }

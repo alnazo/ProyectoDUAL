@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 import java.sql.Timestamp;
 import java.util.Date;
 
@@ -22,7 +23,7 @@ public class Tablon implements Serializable {
     private String message;
     private Usuario idUsuario;
     private int likes;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone="Europe/Berlin")
     private Timestamp createAt;
 
     public Tablon(ResultSet result) {

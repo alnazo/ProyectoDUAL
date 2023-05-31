@@ -22,15 +22,15 @@
                     <div class="accordion-body">
                         <ul class="nav flex-column">
                             <li class="nav-item">
-                                <a class="nav-link" href="perfil">Perfil</a>
+                                <a class="nav-link" href="/perfil">Perfil</a>
                             </li>
                             <% if (usuario.getAdmin()) { %>
                             <li class="nav-item">
-                                <a class="nav-link" href="admin">Administracion</a>
+                                <a class="nav-link" href="/admin">Administracion</a>
                             </li>
                             <% } %>
                             <li class="nav-item">
-                                <a class="nav-link" href="disconnect">Desconectar</a>
+                                <a class="nav-link" href="/disconnect">Desconectar</a>
                             </li>
                         </ul>
                     </div>

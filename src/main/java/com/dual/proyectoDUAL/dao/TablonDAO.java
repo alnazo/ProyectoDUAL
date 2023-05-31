@@ -32,6 +32,7 @@ public class TablonDAO {
             mapper.registerModule(new JavaTimeModule());
             CollectionType setType = mapper.getTypeFactory().constructCollectionType(List.class, Tablon.class);
             tablones = mapper.readValue(json, setType);
+
         } else {
             tablones = null;
         }
@@ -48,6 +49,7 @@ public class TablonDAO {
             mapper.registerModule(new JavaTimeModule());
             CollectionType setType = mapper.getTypeFactory().constructCollectionType(List.class, Tablon.class);
             tablones = mapper.readValue(json, setType);
+
         } else {
             tablones = null;
         }

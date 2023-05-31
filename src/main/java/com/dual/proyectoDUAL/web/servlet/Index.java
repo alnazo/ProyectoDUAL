@@ -18,6 +18,12 @@ public class Index extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
+        //Forzado de que exista un usuario
+        req.getSession().setAttribute("usuarioSesion", new UsuarioDAO().getUsuario(4));
+        //Forzado de que exista un usuario
+
+
+
         ServletContext servletContext = getServletContext();
         req.getSession().setAttribute("servletContext", servletContext);
         List<Tablon> tablon = new TablonDAO().findAll();
