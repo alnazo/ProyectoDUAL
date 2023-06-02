@@ -9,21 +9,29 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebFilter(filterName = "FiltroSesion", urlPatterns = { "/grupos", "/grupos/*" }, dispatcherTypes = { DispatcherType.REQUEST, DispatcherType.FORWARD })
-public class GroupFilter implements Filter{
+@WebFilter(filterName = "FiltroGrupos", urlPatterns = {"/grupos"}, dispatcherTypes = {DispatcherType.REQUEST, DispatcherType.FORWARD})
+public class GroupFilter implements Filter {
+
+    @Override
+    public void init(FilterConfig filterConfig) throws ServletException {
+    }
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        HttpServletRequest req=(HttpServletRequest)servletRequest;
-        Usuario usuario = (Usuario)req.getSession().getAttribute("usuarioSesion");
+        HttpServletRequest req = (HttpServletRequest) servletRequest;
+        Usuario usuario = (Usuario) req.getSession().getAttribute("usuarioSesion");
 
         if (usuario == null) {
             Notificaciones.error = true;
             Notificaciones.msg = "Error, debes estar logueado para acceder.";
-            ((HttpServletResponse)servletResponse).sendRedirect("/login");
+            ((HttpServletResponse) servletResponse).sendRedirect("/login");
         } else {
             filterChain.doFilter(servletRequest, servletResponse);
         }
+    }
+
+    @Override
+    public void destroy() {
     }
 
 }

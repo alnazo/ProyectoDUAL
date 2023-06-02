@@ -8,7 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebFilter(filterName = "FiltroSesion", urlPatterns = { "/login", "/registro", "/forgot" }, dispatcherTypes = { DispatcherType.REQUEST, DispatcherType.FORWARD })
+@WebFilter(filterName = "FiltroSesion", urlPatterns = {"/login", "/registro", "/forgot"}, dispatcherTypes = {DispatcherType.REQUEST, DispatcherType.FORWARD})
 public class UserFilter implements Filter {
 
     @Override
@@ -18,12 +18,12 @@ public class UserFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        HttpServletRequest req=(HttpServletRequest)servletRequest;
+        HttpServletRequest req = (HttpServletRequest) servletRequest;
 
-        Usuario usuario = (Usuario)req.getSession().getAttribute("usuarioSesion");
+        Usuario usuario = (Usuario) req.getSession().getAttribute("usuarioSesion");
 
         if (usuario != null) {
-            ((HttpServletResponse)servletResponse).sendRedirect("/home");
+            ((HttpServletResponse) servletResponse).sendRedirect("/home");
         } else {
             filterChain.doFilter(servletRequest, servletResponse);
         }

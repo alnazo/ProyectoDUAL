@@ -25,16 +25,28 @@ public class ServicioDAO {
         String path = "/getAll";
         String json = webTarget.path(path).request(MediaType.APPLICATION_JSON).get(String.class);
 
-        List<Servicio> servicios = new ArrayList<>();
+        List<Servicio> servicios = null;
         if (json.length() > 4) {
             ObjectMapper mapper = new ObjectMapper();
             CollectionType setType = mapper.getTypeFactory().constructCollectionType(List.class, Servicio.class);
             servicios = mapper.readValue(json, setType);
-        } else {
-            servicios = null;
         }
         return servicios;
     }
 
+    public List<Servicio> getByName(String servicio) throws JsonProcessingException {
+        String path = servicio+"/getS";
+        String json = webTarget.path(path).request(MediaType.APPLICATION_JSON).get(String.class);
+
+        List<Servicio> servicios = null;
+        if(json.length()>4){
+            ObjectMapper mapper = new ObjectMapper();
+            CollectionType setType = mapper.getTypeFactory().constructCollectionType(List.class, Servicio.class);
+            servicios = mapper.readValue(json, setType);
+        }
+        return servicios;
+
+
+    }
 
 }

@@ -1,20 +1,26 @@
 <%@ page pageEncoding="UTF-8" %>
 <%@ page import="com.dual.proyectoDUAL.web.notifications.Notificaciones" %>
 <%@ page import="java.util.List" %>
+<%@ page import="java.util.Map" %>
 <%@ page import="com.dual.proyectoDUAL.dto.Servicio" %>
 
 
 <%
-
 List<Servicio> servicios = (List<Servicio>) session.getAttribute("servicios");
+Map<String, List<Servicio>> serviciosGruped = (Map<String, List<Servicio>>) session.getAttribute("serviciosGruped");
 
+String paramServicio = request.getParameter("servicio");
+String paramMin = request.getParameter("min");
+String paramMax = request.getParameter("max");
 %>
 <!DOCTYPE html>
 <html lang="es">
     <head>
         <%@ include file="/parts/meta.jsp" %>
         <title>Servicios - ProyectoDUAL</title>
+        <link rel="stylesheet" href="/css/formRangeSlider.css">
         <%@ include file="/parts/header.jsp" %>
+
     </head>
     <body>
     <div class="container-fluid">
@@ -24,6 +30,44 @@ List<Servicio> servicios = (List<Servicio>) session.getAttribute("servicios");
             </div>
             <div class="col-10 content">
                 <div class="container">
+
+                    <form action"#" method="GET">
+                        <div class="row mb-3 align-items-center">
+                            <div class="col-auto me-3 text-center">
+                                <label for="servicio" class="form-label">Servicio:</label>
+                                <select class="form-select" aria-label="servicios" id="sevicios" name="servicio">
+                                    <% if (paramServicio != null){ %>
+                                        <option value="">Elija una opcion...</option>
+                                    <% } else { %>
+                                        <option value="" selected>Elija una opcion...</option>
+                                    <% } %>
+                                    <% if (serviciosGruped != null) {
+                                        for (String servi : serviciosGruped.keySet()){
+                                    %>
+                                        <% if (paramServicio != null){ %>
+                                            <option value="<%=servi%>" <%= (paramServicio.equals(servi)) ? "selected" : "" %>><%=servi%></option>
+                                        <% } else { %>
+                                            <option value="<%=servi%>"><%=servi%></option>
+                                    <% } } } %>
+
+                                </select>
+                            </div>
+                            <div class="col-auto me-3 text-center">
+                                <label for="precio" class="form-label">Precio:</label>
+                                <div class="min-max-slider" data-legendnum="2">
+                                    <label for="min">Minimo</label>
+                                    <input id="min" class="min" name="min" type="range" step="1" min="1" max="100" />
+                                    <label for="max">Maximo</label>
+                                    <input id="max" class="max" name="max" type="range" step="1" min="1" max="100" />
+                                </div>
+                            </div>
+                            <div class="col-auto me-3">
+                                <button class="btn btn-primary" type="submit">Filtrar</button>
+                                <a href="/servicios"><button class="btn btn-primary" type="button">Limpiar filtro</button></a>
+                            </div>
+                        </div>
+                    </form>
+
                     <%
                     if (servicios != null){
                     %>
@@ -36,8 +80,8 @@ List<Servicio> servicios = (List<Servicio>) session.getAttribute("servicios");
                                       <div class="card-body">
                                         <h4 class="card-title"><%= servicio.getNombre() %> </h4>
                                         <h5 class="card-tittle"><%= servicio.getPlan()%> </h5>
-                                        <p class="card-text">Precio: <%=servicio.getPrecio()%></p>
-                                        <a href="/grupos/<%= servicio.getId() %>" class="btn btn-primary">Buscar grupo</a>
+                                        <p class="card-text">Precio: <%=servicio.getPrecio()%> €</p>
+                                        <a href="/grupos?servicio=<%= servicio.getNombre() %>&plan=<%= servicio.getPlan()%>" class="btn btn-primary">Buscar grupo</a>
                                       </div>
                                     </div>
                                 </div>
@@ -72,4 +116,9 @@ List<Servicio> servicios = (List<Servicio>) session.getAttribute("servicios");
 
     </body>
     <%@ include file="/parts/footer.jsp" %>
+    <script>
+        var parMin = <%= paramMin %>;
+        var parMax = <%= paramMax %>;
+    </script>
+    <script src="/js/rangeSlider.js"></script>
 </html>

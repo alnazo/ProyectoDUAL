@@ -130,4 +130,5 @@ Usuario user = (Usuario) session.getAttribute("usuarioSesion");
 
     </body>
     <%@ include file="/parts/footer.jsp" %>
+    <script src="/js/sendMenssage.js"></script>
 </html>
