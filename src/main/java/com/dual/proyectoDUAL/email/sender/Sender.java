@@ -28,9 +28,6 @@ public class Sender {
     @Getter
     Properties credentialProp = new Properties();
 
-    public File [] archivosAdjuntos;
-    private String nombreArchivos;
-
     public Sender() {
         try {
             mailProp.load(getClass().getClassLoader().getResourceAsStream("mailProperties/mail.properties"));
@@ -40,46 +37,41 @@ public class Sender {
         }
     }
 
-    public String send(String from, String to, String subject, String emailText, File[] adjuntos) throws FileNotFoundException, IOException {
+    public boolean send(String from, String to, String subject, String emailText, String content) throws FileNotFoundException, IOException {
 
         Session session = createSession();
-        String msg;
 
         try {
-
-            // Create the email body
-            MimeMultipart multipart = new MimeMultipart();
-            BodyPart text = new MimeBodyPart();
-            text.setContent(emailText, "text/html; charset=utf-8");
-            multipart.addBodyPart(text);
 
             MimeMessage message = new MimeMessage(session);
             message.setFrom(new InternetAddress(from));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
             message.setSubject(subject);
+
+            // Create the email body
+            BodyPart text = new MimeBodyPart();
+            text.setContent(emailText, "text/html; charset=utf-8");
+
+            BodyPart adjunto = new MimeBodyPart();
+            adjunto.setDataHandler(new DataHandler(new FileDataSource(content)));
+            String[] particiones = content.split("/");
+            String adjuntoNombre = particiones[particiones.length - 1];
+            adjunto.setFileName(adjuntoNombre);
+
+            MimeMultipart multipart = new MimeMultipart();
+            multipart.addBodyPart(text);
+            multipart.addBodyPart(adjunto);
+
             message.setContent(multipart);
-
-            // Agregar archivos adjuntos
-            if (adjuntos != null && adjuntos.length > 0) {
-                for (File adjunto : adjuntos) {
-                    if (adjunto.exists()) {
-                        BodyPart adjuntoBodyPart = new MimeBodyPart();
-                        adjuntoBodyPart.setDataHandler(new DataHandler(new FileDataSource(adjunto.getAbsolutePath())));
-                        adjuntoBodyPart.setFileName(adjunto.getName());
-                        multipart.addBodyPart(adjuntoBodyPart);
-                    }
-                }
-            }
-
-            message.setContent(multipart);
-
-
+            System.out.println("Enviando...");
             Transport.send(message);
+            System.out.println("E-mail enviado correctamente");
 
-            return msg = "Email enviado correctamente";
+            return true;
 
         } catch (MessagingException mex) {
-            return msg = "Error al enviar el mensaje: " + mex.getMessage();
+            mex.printStackTrace();
+            return false;
         }
     }
 

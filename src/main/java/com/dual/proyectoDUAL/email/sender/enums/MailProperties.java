@@ -7,6 +7,7 @@ public enum MailProperties {
     USER(1,"mail.smtp.user"),
     PASSWORD(2,"mail.smtp.password");
 
+
     private final int id;
     private final String name;
 
