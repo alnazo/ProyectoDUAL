@@ -1,88 +1,106 @@
 package com.dual.proyectoDUAL.dao;
 
 import com.dual.proyectoDUAL.dto.Tablon;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.type.CollectionType;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import jakarta.ws.rs.client.Client;
+import jakarta.ws.rs.client.ClientBuilder;
+import jakarta.ws.rs.client.Entity;
+import jakarta.ws.rs.client.WebTarget;
+import jakarta.ws.rs.core.MediaType;
 
-import java.sql.*;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
 
 public class TablonDAO {
-    private Connection connection;
 
-    public TablonDAO(Connection connection) {
-        this.connection = connection;
+    private final WebTarget webTarget;
+
+    public TablonDAO() {
+        Client client = ClientBuilder.newClient();
+        this.webTarget = client.target("http://localhost:8081/api/tablones/");
     }
 
-    public List<Tablon> obtenerTodoTablon() {
+    public List<Tablon> findAll() throws JsonProcessingException {
+        String path = "getAll";
+        String json = webTarget.path(path).request(MediaType.APPLICATION_JSON).get(String.class);
+
         List<Tablon> tablones = new ArrayList<>();
-        String sql = "SELECT * FROM tablon";
-        try (Statement statement = connection.createStatement();
-             ResultSet result = statement.executeQuery(sql)) {
-            while (result.next()) {
-                Tablon tablon = new Tablon(result);
-                tablones.add(tablon);
+        if (json.length() > 4) {
+            ObjectMapper mapper = new ObjectMapper();
+            mapper.registerModule(new JavaTimeModule());
+            CollectionType setType = mapper.getTypeFactory().constructCollectionType(List.class, Tablon.class);
+            tablones = mapper.readValue(json, setType);
+
+
+            for (Tablon tablon : tablones) {
+                Timestamp timestamp = tablon.getCreateAt();
+                LocalDateTime localDateTime = timestamp.toLocalDateTime().minusHours(2);
+                Timestamp adjustedTimestamp = Timestamp.valueOf(localDateTime.atOffset(ZoneOffset.UTC).toLocalDateTime());
+                tablon.setCreateAt(adjustedTimestamp);
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+
+
+        } else {
+            tablones = null;
         }
         return tablones;
     }
 
-    public Tablon obneterTablonPorId(int id) {
-        String sql = "SELECT * FROM tablon WHERE id = ?";
-        try (PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setInt(1, id);
-            try (ResultSet result = statement.executeQuery()) {
-                if (result.next()) {
-                    return new Tablon(result);
-                }
+    public List<Tablon> findByUserId(int id) throws JsonProcessingException {
+        String path = id + "/getAllUser";
+        String json = webTarget.path(path).request(MediaType.APPLICATION_JSON).get(String.class);
+
+        List<Tablon> tablones = new ArrayList<>();
+        if (json.length() > 4) {
+            ObjectMapper mapper = new ObjectMapper();
+            mapper.registerModule(new JavaTimeModule());
+            CollectionType setType = mapper.getTypeFactory().constructCollectionType(List.class, Tablon.class);
+            tablones = mapper.readValue(json, setType);
+
+            for (Tablon tablon : tablones) {
+                Timestamp timestamp = tablon.getCreateAt();
+                LocalDateTime localDateTime = timestamp.toLocalDateTime().minusHours(2);
+                Timestamp adjustedTimestamp = Timestamp.valueOf(localDateTime.atOffset(ZoneOffset.UTC).toLocalDateTime());
+                tablon.setCreateAt(adjustedTimestamp);
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+
+
+        } else {
+            tablones = null;
         }
-        return null;
+        return tablones;
     }
 
-    public void insertarTablon(Tablon tablon) {
-        String sql = "INSERT INTO tablon (mensaje, id_user, likes, create_at) " +
-                "VALUES (?, ?, ?, ?)";
-        try (PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-            statement.setString(1, tablon.getMensaje());
-            statement.setInt(2, tablon.getId_user());
-            statement.setInt(3, tablon.getLikes());
-            statement.setTimestamp(4, Timestamp.valueOf(tablon.getCreatedAt()));
-            statement.executeUpdate();
+    public Tablon findById(int id) throws JsonProcessingException {
+        Tablon tab = null;
 
-            ResultSet generatedKeys = statement.getGeneratedKeys();
-            if (generatedKeys.next()) {
-                tablon.setId(generatedKeys.getInt(1));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        String path = id + "/get";
+        String json = webTarget.path(path).request(MediaType.APPLICATION_JSON).get(String.class);
+        if (json.length() > 4) {
+            ObjectMapper mapper = new ObjectMapper();
+            mapper.registerModule(new JavaTimeModule());
+            tab = mapper.readValue(json, Tablon.class);
+
+            Timestamp timestamp = tab.getCreateAt();
+            LocalDateTime localDateTime = timestamp.toLocalDateTime().minusHours(2);
+            Timestamp adjustedTimestamp = Timestamp.valueOf(localDateTime.atOffset(ZoneOffset.UTC).toLocalDateTime());
+            tab.setCreateAt(adjustedTimestamp);
         }
+
+        return tab;
     }
 
-    public void actualizarTablon(Tablon tablon) {
-        String sql = "UPDATE tablon SET mensaje = ?, id_user = ?, likes = ?, create_at = ? WHERE id = ?";
-        try (PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setString(1, tablon.getMensaje());
-            statement.setInt(2, tablon.getId_user());
-            statement.setInt(3, tablon.getLikes());
-            statement.setTimestamp(4, Timestamp.valueOf(tablon.getCreatedAt()));
-            statement.setInt(5, tablon.getId());
-            statement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public Tablon send(Tablon tab) throws JsonProcessingException {
+        String path = "/add";
+        return webTarget.path(path)
+                .request(MediaType.APPLICATION_JSON)
+                .post(Entity.entity(tab, MediaType.APPLICATION_JSON), Tablon.class);
     }
 
-    public void eliminarTablon(int id) {
-        String sql = "DELETE FROM tablon WHERE id = ?";
-        try (PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setInt(1, id);
-            statement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
 }
