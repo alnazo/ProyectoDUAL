@@ -30,7 +30,6 @@ public class Forgot extends HttpServlet {
         } else {
             Usuario user = new UsuarioDAO().findByEmail(emailIntroducido);
             if (user != null) {
-                //TODO -- revisar funcionamiento correcto
                 Sender sender = new Sender();
                 sender.send("1234solojuegos@gmail.com", user.getEmail(), "Contraseña olvidada",
                         "Ha olvidado su contraseña, necesita volver a loggearse", "");
