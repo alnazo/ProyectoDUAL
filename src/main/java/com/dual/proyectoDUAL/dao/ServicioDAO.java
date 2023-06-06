@@ -1,103 +1,66 @@
 package com.dual.proyectoDUAL.dao;
 
 import com.dual.proyectoDUAL.dto.Servicio;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.type.CollectionType;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import jakarta.ws.rs.client.Client;
+import jakarta.ws.rs.client.ClientBuilder;
+import jakarta.ws.rs.client.Entity;
+import jakarta.ws.rs.client.WebTarget;
+import jakarta.ws.rs.core.MediaType;
 
-import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ServicioDAO {
-    private Connection connection;
 
-    public ServicioDAO(Connection connection) {
-        this.connection = connection;
+    private final WebTarget webTarget;
+
+    public ServicioDAO() {
+        Client client = ClientBuilder.newClient();
+        this.webTarget = client.target("http://localhost:8081/api/servicios/");
     }
 
-    public List<Servicio> obtenerTodoServicio() {
+    public List<Servicio> getAll() throws JsonProcessingException {
+        String path = "/getAll";
+        String json = webTarget.path(path).request(MediaType.APPLICATION_JSON).get(String.class);
+
         List<Servicio> servicios = new ArrayList<>();
-        try {
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM servicio");
-            while (resultSet.next()) {
-                Servicio servicio = new Servicio(
-                        resultSet.getInt("id"),
-                        resultSet.getString("nombre"),
-                        resultSet.getFloat("precio"),
-                        resultSet.getString("web")
-                );
-                servicios.add(servicio);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        if (json.length() > 4) {
+            ObjectMapper mapper = new ObjectMapper();
+            CollectionType setType = mapper.getTypeFactory().constructCollectionType(List.class, Servicio.class);
+            servicios = mapper.readValue(json, setType);
+        } else {
+            servicios = null;
         }
         return servicios;
     }
 
-    public Servicio obtenerServicio(int id) {
-        Servicio servicio = null;
-        try {
-            PreparedStatement statement = connection.prepareStatement(
-                    "SELECT * FROM servicio WHERE id = ?"
-            );
-            statement.setInt(1, id);
-            ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()) {
-                servicio = new Servicio(
-                        resultSet.getInt("id"),
-                        resultSet.getString("nombre"),
-                        resultSet.getFloat("precio"),
-                        resultSet.getString("web")
-                );
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+
+    public List<Servicio> findAll() throws JsonProcessingException {
+        String path = "getAll";
+        String json = webTarget.path(path).request(MediaType.APPLICATION_JSON).get(String.class);
+
+        List<Servicio> servicios = new ArrayList<>();
+        if (json.length() > 4) {
+            ObjectMapper mapper = new ObjectMapper();
+            mapper.registerModule(new JavaTimeModule());
+            CollectionType setType = mapper.getTypeFactory().constructCollectionType(List.class, Servicio.class);
+            servicios = mapper.readValue(json, setType);
+
+
+        } else {
+            servicios = null;
         }
-        return servicio;
+        return servicios;
     }
 
-
-    public void insertarServicio(Servicio servicio) {
-        try {
-            PreparedStatement statement = connection.prepareStatement(
-                    "INSERT INTO servicio (nombre, precio, web) VALUES (?, ?, ?)"
-            );
-            statement.setString(1, servicio.getNombre());
-            statement.setDouble(2, servicio.getPrecio());
-            statement.setString(3, servicio.getWeb());
-            statement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public Servicio register(Servicio servicio) {
+        String path = "/add";
+        return webTarget.path(path)
+                .request(MediaType.APPLICATION_JSON)
+                .post(Entity.entity(servicio, MediaType.APPLICATION_JSON), Servicio.class);
     }
-
-
-
-    public void actualizarServicio(Servicio servicio) {
-        try {
-            PreparedStatement statement = connection.prepareStatement(
-                    "UPDATE servicio SET nombre = ?, precio = ?, web = ? WHERE id = ?"
-            );
-            statement.setString(1, servicio.getNombre());
-            statement.setDouble(2, servicio.getPrecio());
-            statement.setString(3, servicio.getWeb());
-            statement.setInt(4, servicio.getId());
-            statement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void eliminarServicio(int id) {
-        try {
-            PreparedStatement statement = connection.prepareStatement(
-                    "DELETE FROM usuario WHERE id = ?"
-            );
-            statement.setInt(1, id);
-            statement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            }
-
-        }
-
-    }
+}

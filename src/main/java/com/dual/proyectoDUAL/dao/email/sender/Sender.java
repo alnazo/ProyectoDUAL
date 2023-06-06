@@ -1,19 +1,14 @@
-package com.dual.proyectoDUAL.email.sender;
+package com.dual.proyectoDUAL.dao.email.sender;
 
-import com.dual.proyectoDUAL.email.sender.enums.MailProperties;
+import com.dual.proyectoDUAL.dao.email.sender.enums.MailProperties;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.activation.DataHandler;
-import javax.activation.FileDataSource;
-import javax.mail.BodyPart;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.*;
-import java.io.File;
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
@@ -37,45 +32,33 @@ public class Sender {
         }
     }
 
-    public boolean send(String from, String to, String subject, String emailText, String content) throws FileNotFoundException, IOException {
+    public String send(String from, String to, String subject, String emailText, String content) throws FileNotFoundException, IOException {
 
         Session session = createSession();
 
         try {
 
+            MimeMultipart multipart = new MimeMultipart();
+            BodyPart text = new MimeBodyPart();
+            text.setContent(emailText, "text/html; charset=utf-8");
+            multipart.addBodyPart(text);
+
             MimeMessage message = new MimeMessage(session);
             message.setFrom(new InternetAddress(from));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
             message.setSubject(subject);
-
-            // Create the email body
-            BodyPart text = new MimeBodyPart();
-            text.setContent(emailText, "text/html; charset=utf-8");
-
-            BodyPart adjunto = new MimeBodyPart();
-            adjunto.setDataHandler(new DataHandler(new FileDataSource(content)));
-            String[] particiones = content.split("/");
-            String adjuntoNombre = particiones[particiones.length - 1];
-            adjunto.setFileName(adjuntoNombre);
-
-            MimeMultipart multipart = new MimeMultipart();
-            multipart.addBodyPart(text);
-            multipart.addBodyPart(adjunto);
+            message.setContent(multipart);
 
             message.setContent(multipart);
-            System.out.println("Enviando...");
-            Transport.send(message);
-            System.out.println("E-mail enviado correctamente");
 
-            return true;
+            Transport.send(message);
+
+            return "Email enviado correctamente";
 
         } catch (MessagingException mex) {
-            mex.printStackTrace();
-            return false;
+            return "Error al enviar el email: " + mex.getMessage();
         }
     }
-
-
 
     private Session createSession() {
         Session session = Session.getInstance(mailProp, new javax.mail.Authenticator() {
@@ -88,7 +71,5 @@ public class Sender {
         session.setDebug(true);
         return session;
     }
-
-
 
 }

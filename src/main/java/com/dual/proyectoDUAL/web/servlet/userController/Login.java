@@ -1,15 +1,16 @@
 package com.dual.proyectoDUAL.web.servlet.userController;
 
+import com.dual.proyectoDUAL.dao.UsuarioDAO;
 import com.dual.proyectoDUAL.dto.Usuario;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name="Login", urlPatterns = "/login")
+@WebServlet(name = "Login", urlPatterns = "/login")
 public class Login extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -18,40 +19,30 @@ public class Login extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Usuario usuario = (Usuario) req.getSession().getAttribute("usuarioSesion");
 
-        if (usuario != null) {
-            homePage(resp, usuario);
-        } else {
-            String emailConfigurado=getServletContext().getInitParameter("email");
-            String passwordConfigurado=getServletContext().getInitParameter("password");
+        String emailIntroducido = req.getParameter("email");
+        String passwordIntroducido = req.getParameter("password");
+        String rememberSession = req.getParameter("remember");
 
-            String emailIntroducido = req.getParameter("email");
-            String passwordIntroducido = req.getParameter("password");
-            String rememberSession = req.getParameter("remember");
+        Usuario getUser = new UsuarioDAO().findByEmail(emailIntroducido);
 
-            if ((emailIntroducido != null && emailIntroducido.equals(emailConfigurado)) && (passwordIntroducido != null && passwordIntroducido.equals(passwordConfigurado))) {
-                usuario = Usuario.builder().email(emailIntroducido).password(passwordIntroducido).build();
-
-                if(rememberSession != null){
+        if (getUser != null) {
+            if (getUser.getPassword().equals(passwordIntroducido)) {
+                if (rememberSession != null) {
                     req.getSession().setMaxInactiveInterval(-1);
                 } else {
                     req.getSession().setMaxInactiveInterval(Integer.parseInt(req.getServletContext().getInitParameter("sessionTimeout")));
                 }
-                req.getSession().setAttribute("usuarioSesion", usuario);
+                req.getSession().setAttribute("usuarioSesion", getUser);
                 resp.sendRedirect("home");
-            }
-            else {
-                req.setAttribute("error","Error al insertar el correo o la contraseña");
+            } else {
+                req.setAttribute("error", "Error al insertar la contraseña");
                 req.getRequestDispatcher("/userControl/login.jsp").forward(req, resp);
             }
+        } else {
+            req.setAttribute("error", "Error, el correo introducido no existe");
+            req.getRequestDispatcher("/userControl/login.jsp").forward(req, resp);
         }
-
     }
-
-    private void homePage(HttpServletResponse resp, Usuario usuario) throws IOException {
-
-    }
-
 
 }

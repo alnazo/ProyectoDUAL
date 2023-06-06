@@ -1,8 +1,8 @@
 package com.dual.proyectoDUAL.web.servlet.mailController;
 
 import com.dual.proyectoDUAL.dto.Usuario;
-import com.dual.proyectoDUAL.email.sender.Sender;
-import com.dual.proyectoDUAL.itext.PdfItext;
+import com.dual.proyectoDUAL.dao.email.sender.Sender;
+import com.dual.proyectoDUAL.dao.itext.PdfItext;
 import com.itextpdf.text.DocumentException;
 
 import javax.servlet.ServletException;

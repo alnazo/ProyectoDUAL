@@ -1,4 +1,4 @@
-package com.dual.proyectoDUAL.itext;
+package com.dual.proyectoDUAL.dao.itext;
 
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.*;
