@@ -70,4 +70,8 @@ public class UsuarioDAO {
                 .post(Entity.entity(user, MediaType.APPLICATION_JSON), Usuario.class);
     }
 
+
+    public void delete(Usuario user) {
+
+    }
 }

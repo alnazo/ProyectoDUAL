@@ -25,10 +25,7 @@ public class Login extends HttpServlet {
         String passwordIntroducido = req.getParameter("password");
         String rememberSession = req.getParameter("remember");
 
-        Usuario getUser = new UsuarioDAO().findByEmail(emailIntroducido);
-
-
-        Usuario user = new Usuario();
+        Usuario user = new UsuarioDAO().findByEmail(emailIntroducido);
 
         String emailuser = user.getEmail();
         String passworduser = user.getPassword();
