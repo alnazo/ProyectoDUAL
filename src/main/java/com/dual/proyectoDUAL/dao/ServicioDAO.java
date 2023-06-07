@@ -45,8 +45,18 @@ public class ServicioDAO {
             servicios = mapper.readValue(json, setType);
         }
         return servicios;
+    }
 
+    public Servicio findBySP(String servicio, String plan) throws JsonProcessingException {
+        String path = servicio+"/"+plan+"/"+"getSP";
+        String json = webTarget.path(path).request(MediaType.APPLICATION_JSON).get(String.class);
 
+        Servicio servi = null;
+        if(json.length() > 4){
+            ObjectMapper mapper = new ObjectMapper();
+            servi = mapper.readValue(json, Servicio.class);
+        }
+        return servi;
     }
 
 }
