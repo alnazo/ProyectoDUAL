@@ -40,7 +40,11 @@
                                         <td><%=tablon.getId()%></td>
                                          <td><%=tablon.getMessage()%></td>
                                           <td><%=tablon.getIdUsuario().getUsername()%></td>
-                                             <td><a href="" ><i class="fa-regular fa-trash"></i></a></td>
+                                          <td><form action="/admin/tablon" method="post" >
+                                          <input type="text" hidden name="id" value="<%=tablon.getId()%>">
+                                          <button><i class="fa-regular fa-trash" ></i></button>
+                                          </form>
+                                          </td>
                                     </tr>
                                 <% } %>
                                 </tbody>

@@ -29,5 +29,13 @@ public class AdminUsuario extends HttpServlet {
         }
     }
 
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int idUsuario= Integer.parseInt(req.getParameter("id"));
+        Usuario user = new UsuarioDAO().getUsuario(idUsuario);
 
+        new UsuarioDAO().delete(user);
+
+        resp.sendRedirect("/admin/usuario");
+    }
 }

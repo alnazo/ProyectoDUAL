@@ -2,6 +2,7 @@ package com.dual.proyectoDUAL.web.servlet;
 
 
 import com.dual.proyectoDUAL.dao.TablonDAO;
+import com.dual.proyectoDUAL.dao.UsuarioDAO;
 import com.dual.proyectoDUAL.dto.Tablon;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;

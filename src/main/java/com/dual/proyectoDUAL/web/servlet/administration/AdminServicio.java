@@ -1,9 +1,7 @@
 package com.dual.proyectoDUAL.web.servlet.administration;
 
 import com.dual.proyectoDUAL.dao.ServicioDAO;
-import com.dual.proyectoDUAL.dao.TablonDAO;
 import com.dual.proyectoDUAL.dto.Servicio;
-import com.dual.proyectoDUAL.dto.Tablon;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
