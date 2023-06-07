@@ -20,7 +20,7 @@ public class AdminGrupo extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try{
-            List<Grupo> grupos = new GrupoDAO().findAll();
+            List<Grupo> grupos = new GrupoDAO().getAll();
 
             req.getSession().setAttribute("grupo", grupos);
             req.getRequestDispatcher("/administracion/grupo.jsp").forward(req, resp);

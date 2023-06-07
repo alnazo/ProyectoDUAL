@@ -16,7 +16,7 @@ public class AdminServicio extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try{
-            List<Servicio> servicios = new ServicioDAO().findAll();
+            List<Servicio> servicios = new ServicioDAO().getAll();
 
             req.getSession().setAttribute("servicio", servicios);
             req.getRequestDispatcher("/administracion/servicio.jsp").forward(req, resp);

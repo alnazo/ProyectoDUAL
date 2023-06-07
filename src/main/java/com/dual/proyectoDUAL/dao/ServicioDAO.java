@@ -61,24 +61,6 @@ public class ServicioDAO {
         return servi;
     }
 
-    public List<Servicio> findAll() throws JsonProcessingException {
-        String path = "getAll";
-        String json = webTarget.path(path).request(MediaType.APPLICATION_JSON).get(String.class);
-
-        List<Servicio> servicios = new ArrayList<>();
-        if (json.length() > 4) {
-            ObjectMapper mapper = new ObjectMapper();
-            mapper.registerModule(new JavaTimeModule());
-            CollectionType setType = mapper.getTypeFactory().constructCollectionType(List.class, Servicio.class);
-            servicios = mapper.readValue(json, setType);
-
-
-        } else {
-            servicios = null;
-        }
-        return servicios;
-    }
-
     public Servicio register(Servicio servicio) {
         String path = "/add";
         return webTarget.path(path)

@@ -10,9 +10,11 @@
             <li class="nav-item">
                 <a class="nav-link ps-0" aria-current="page" href="/servicios"><i class="fas fa-search fa-lg"></i> <span class="text-hover">Servicios</span></a>
             </li>
+            <% if(session.getAttribute("usuarioSesion") != null){ %>
             <li class="nav-item">
                 <a class="nav-link ps-0" aria-current="page" href="/grupos"><i class="fas fa-users fa-lg"></i> <span class="text-hover">Grupos</span></a>
             </li>
+            <% } %>
         </ul>
     </div>
     <div class="down-section">

@@ -1,6 +1,8 @@
 <%@ page pageEncoding="UTF-8" %>
 <%@ page import="com.dual.proyectoDUAL.web.notifications.Notificaciones" %>
 <%@ page import="com.dual.proyectoDUAL.dto.Grupo" %>
+<%@ page import="com.dual.proyectoDUAL.dto.Servicio" %>
+
 
 <%@ page import="java.util.List"%>
 <%@ page import="java.util.Map"%>
@@ -38,26 +40,21 @@ Map<String, List<Servicio>> serviciosGruped = (Map<String, List<Servicio>>) sess
                                     </div>
                                     <div class="modal-body">
                                         <div class="mb-3">
-                                            <label for="servicio" class="form-label"></label>
+                                            <label for="servicio" class="form-label">Seleccione plataforma</label>
                                             <select class="form-select" aria-label="servicio" id="sevicio" name="servicio">
-                                                <% if (paramServicio != null){ %>
-                                                    <option value="">Elija una opcion...</option>
-                                                <% } else { %>
-                                                    <option value="" selected>Elija una opcion...</option>
-                                                <% } %>
+                                                <option value="" selected>Elija una opcion...</option>
                                                 <% if (serviciosGruped != null) {
                                                     for (String servi : serviciosGruped.keySet()){
                                                 %>
-                                                    <% if (paramServicio != null){ %>
-                                                        <option value="<%=servi%>" <%= (paramServicio.equals(servi)) ? "selected" : "" %>><%=servi%></option>
-                                                    <% } else { %>
-                                                        <option value="<%=servi%>"><%=servi%></option>
-                                                <% } } } %>
+                                                    <option value="<%=servi%>"><%=servi%></option>
+                                                <% } } %>
                                             </select>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="plan" class="form-label"></label>
-
+                                            <label for="plan" class="form-label">Seleccione plan</label>
+                                            <select disabled class="form-select" aria-label="plan" id="plan" name="plan">
+                                                <option value="" selected>Elija una opcion...</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="modal-footer">
@@ -69,7 +66,68 @@ Map<String, List<Servicio>> serviciosGruped = (Map<String, List<Servicio>>) sess
                     </div>
 
                     <% if(grupos.size() > 0){ %>
-
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Servicio</th>
+                                    <th scope="col">Plan</th>
+                                    <th scope="col">Precio (desde)</th>
+                                    <th scope="col">Hueco 1 (Lider)</th>
+                                    <th scope="col">Hueco 2</th>
+                                    <th scope="col">Hueco 3</th>
+                                    <th scope="col">Hueco 4</th>
+                                    <th scope="col">Hueco 5</th>
+                                    <th scope="col">Hueco 6</th>
+                                    <th scope="col">Hueco 7</th>
+                                    <th scope="col">Hueco 8</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% for(Grupo gr : grupos) { %>
+                                    <tr>
+                                        <td scope="row"><%= gr.getServicio().getNombre() %></td>
+                                        <td><%= gr.getServicio().getPlan() %></td>
+                                        <td><%= gr.getServicio().getPrecio()/8 %></td>
+                                        <td><%= gr.getUser1().getUsername() %></td>
+                                        <% if(gr.getUser2() != null) { %>
+                                            <td><%= gr.getUser2().getUsername() %></td>
+                                        <% } else { %>
+                                            <td><i class="fas fa-plus-circle fa-lg"></i></td>
+                                        <% } %>
+                                        <% if(gr.getUser3() != null) { %>
+                                            <td><%= gr.getUser3().getUsername() %></td>
+                                        <% } else { %>
+                                            <td><i class="fas fa-plus-circle fa-lg"></i></td>
+                                        <% } %>
+                                        <% if(gr.getUser4() != null) { %>
+                                            <td><%= gr.getUser4().getUsername() %></td>
+                                        <% } else { %>
+                                            <td><i class="fas fa-plus-circle fa-lg"></i></td>
+                                        <% } %>
+                                        <% if(gr.getUser5() != null) { %>
+                                            <td><%= gr.getUser5().getUsername() %></td>
+                                        <% } else { %>
+                                            <td><i class="fas fa-plus-circle fa-lg"></i></td>
+                                        <% } %>
+                                        <% if(gr.getUser6() != null) { %>
+                                            <td><%= gr.getUser6().getUsername() %></td>
+                                        <% } else { %>
+                                            <td><i class="fas fa-plus-circle fa-lg"></i></td>
+                                        <% } %>
+                                        <% if(gr.getUser7() != null) { %>
+                                            <td><%= gr.getUser7().getUsername() %></td>
+                                        <% } else { %>
+                                            <td><i class="fas fa-plus-circle fa-lg"></i></td>
+                                        <% } %>
+                                        <% if(gr.getUser8() != null) { %>
+                                            <td><%= gr.getUser8().getUsername() %></td>
+                                        <% } else { %>
+                                            <td><i class="fas fa-plus-circle fa-lg"></i></td>
+                                        <% } %>
+                                    </tr>
+                                <% } %>
+                            </tbody>
+                        </table>
                     <% } else { %>
                         <h2>No hay grupos</h2>
                     <% } %>
@@ -99,4 +157,5 @@ Map<String, List<Servicio>> serviciosGruped = (Map<String, List<Servicio>>) sess
 
     </body>
     <%@ include file="/parts/footer.jsp" %>
+    <script src="/js/grupos.js" charset="UTF-8"></script>
 </html>

@@ -23,8 +23,12 @@ public class GrupoServlet extends HttpServlet {
 
         List<Grupo> grupos = new GrupoDAO().getAll();
         List<Servicio> servicios = new ServicioDAO().getAll();
-        Map<String, List<Servicio>> serviciosGruped = servicios.stream().collect(Collectors.groupingBy(e -> e.getNombre()));
-        req.getSession().setAttribute("serviciosGruped", serviciosGruped);
+        if(servicios != null) {
+            Map<String, List<Servicio>> serviciosGruped = servicios.stream().collect(Collectors.groupingBy(e -> e.getNombre()));
+            req.getSession().setAttribute("serviciosGruped", serviciosGruped);
+        } else {
+            req.getSession().setAttribute("serviciosGruped", null);
+        }
 
         if(req.getParameter("servicio")!= null && req.getParameter("plan") != null){
             String servicio = req.getParameter("servicio");

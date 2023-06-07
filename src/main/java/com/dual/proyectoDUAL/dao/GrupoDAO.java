@@ -31,25 +31,9 @@ public class GrupoDAO {
         List<Grupo> grupos = new ArrayList<>();
         if (json.length() > 4) {
             ObjectMapper mapper = new ObjectMapper();
+            mapper.registerModule(new JavaTimeModule());
             CollectionType setType = mapper.getTypeFactory().constructCollectionType(List.class, Grupo.class);
             grupos = mapper.readValue(json, setType);
-        }
-        return grupos;
-    }
-
-    public List<Grupo> findAll() throws JsonProcessingException {
-        String path = "getAll";
-        String json = webTarget.path(path).request(MediaType.APPLICATION_JSON).get(String.class);
-
-        List<Grupo> grupos = new ArrayList<>();
-        if (json.length() > 4) {
-            ObjectMapper mapper = new ObjectMapper();
-            mapper.registerModule(new JavaTimeModule());
-            CollectionType setType = mapper.getTypeFactory().constructCollectionType(List.class, Usuario.class);
-            grupos = mapper.readValue(json, setType);
-
-        } else {
-            grupos = null;
         }
         return grupos;
     }

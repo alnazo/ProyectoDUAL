@@ -19,8 +19,12 @@ public class ServicioServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<Servicio> servicios = new ServicioDAO().getAll();
-        Map<String, List<Servicio>> serviciosGruped = servicios.stream().collect(Collectors.groupingBy(e -> e.getNombre()));
-        req.getSession().setAttribute("serviciosGruped", serviciosGruped);
+        if(servicios != null) {
+            Map<String, List<Servicio>> serviciosGruped = servicios.stream().collect(Collectors.groupingBy(e -> e.getNombre()));
+            req.getSession().setAttribute("serviciosGruped", serviciosGruped);
+        } else {
+            req.getSession().setAttribute("serviciosGruped", null);
+        }
 
         String name = req.getParameter("servicio");
         String min = req.getParameter("min");
