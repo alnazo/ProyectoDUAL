@@ -1,7 +1,9 @@
 package com.dual.proyectoDUAL.web.servlet.administration;
 
 import com.dual.proyectoDUAL.dao.TablonDAO;
+import com.dual.proyectoDUAL.dao.UsuarioDAO;
 import com.dual.proyectoDUAL.dto.Tablon;
+import com.dual.proyectoDUAL.dto.Usuario;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -23,6 +25,16 @@ public class AdminTablon extends HttpServlet {
         }catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int idPost= Integer.parseInt(req.getParameter("id"));
+        Tablon post = new TablonDAO().findById(idPost);
+
+        new TablonDAO().delete(post);
+
+        resp.sendRedirect("/admin/tablon");
     }
 
 }
