@@ -7,6 +7,7 @@ CREATE TABLE usuario(
     usuario varchar(32) NOT NULL,
     pass varchar(64) NOT NULL,
     email varchar(64) NOT NULL,
+    img_perfil varchar(64) NOT NULL,
     nacimiento DATE, -- YYYY-MM-DD
     admin int(1) NOT NULL -- 0/1
 );
