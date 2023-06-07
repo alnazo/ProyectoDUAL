@@ -26,13 +26,11 @@ public class UserPerfil extends HttpServlet {
         String pathInfo = req.getPathInfo();
         if (pathInfo != null && pathInfo.length() > 1) {
             String name = pathInfo.substring(2);
-            System.out.println(name);
             try {
                 Usuario call = new UsuarioDAO().findByNombreExacto(name);
                 List<Tablon> mens = new TablonDAO().findByUserId(call.getId());
                 req.getSession().setAttribute("userSearch", call);
                 req.getSession().setAttribute("userTablon", mens);
-
 
                 req.getRequestDispatcher("/userControl/perfil.jsp").forward(req, resp);
             } catch (NumberFormatException e) {

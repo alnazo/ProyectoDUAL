@@ -18,9 +18,8 @@ import java.util.List;
 public class Index extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-
         ServletContext servletContext = getServletContext();
-        req.getSession().setAttribute("servletContext", servletContext);
+        req.getSession().setAttribute("servletContext" ,servletContext);
         List<Tablon> tablon = new TablonDAO().findAll();
         req.getSession().setAttribute("tablon", tablon);
 

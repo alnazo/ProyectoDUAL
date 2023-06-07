@@ -21,6 +21,14 @@ body {
      color: var(--primary-color) !important;
  }
 
+.imgdefault{
+    color: black;
+}
+
+.card-body {
+    background-color: #959595;
+}
+
  #errorMsg {
     color: black;
  }
@@ -28,4 +36,8 @@ body {
  .post {
      background-color: #382A74;
      border: 2px solid gray;
+ }
+
+ .publicar{
+    background-color: var(--header-back);
  }

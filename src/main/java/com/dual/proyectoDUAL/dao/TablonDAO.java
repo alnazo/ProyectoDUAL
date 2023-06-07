@@ -103,7 +103,8 @@ public class TablonDAO {
                 .post(Entity.entity(tab, MediaType.APPLICATION_JSON), Tablon.class);
     }
 
-    public void delete(Tablon post) {
+    public void delete(Tablon tab){
 
     }
+
 }

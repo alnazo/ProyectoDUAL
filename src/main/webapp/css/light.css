@@ -21,7 +21,15 @@ body {
      color: var(--primary-color) !important;
 }
 
+.imgdefault{
+    color: black;
+}
+
 .post {
     background-color: #5A4DA1;
     border: 2px solid gray;
+}
+
+.publicar{
+    background-color: var(--header-back);
 }

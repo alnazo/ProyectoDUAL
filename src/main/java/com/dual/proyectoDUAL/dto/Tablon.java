@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.Date;
 
 @Data
@@ -26,6 +27,14 @@ public class Tablon implements Serializable {
     private int likes;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone="Europe/Berlin")
     private Timestamp createAt;
+
+    public Tablon (String mensaje, Usuario user){
+        this.id = 0;
+        this.message = mensaje;
+        this.idUsuario = user;
+        this.likes = 0;
+        this.createAt = Timestamp.from(Instant.now());
+    }
 
     public Tablon(ResultSet result) {
         try {

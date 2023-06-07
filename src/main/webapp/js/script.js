@@ -36,7 +36,6 @@ $( function() {
         clearBtn: true,
         language: "es",
    });
-
 });
 
 
