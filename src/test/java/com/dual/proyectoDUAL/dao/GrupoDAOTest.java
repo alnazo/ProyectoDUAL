@@ -1,5 +1,6 @@
 package com.dual.proyectoDUAL.dao;
 
+<<<<<<< HEAD
 import com.dual.proyectoDUAL.dto.Grupo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -142,4 +143,7 @@ public class GrupoDAOTest {
         verify(mockStatement, times(1)).setInt(eq(1), eq(grupoId));
         verify(mockStatement, times(1)).executeUpdate();
     }
+=======
+public class GrupoDAOTest {
+>>>>>>> origin/Laura
 }

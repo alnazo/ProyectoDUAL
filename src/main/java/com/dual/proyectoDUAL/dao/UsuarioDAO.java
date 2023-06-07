@@ -1,92 +1,73 @@
 package com.dual.proyectoDUAL.dao;
 
 import com.dual.proyectoDUAL.dto.Usuario;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.type.CollectionType;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import jakarta.ws.rs.client.Client;
+import jakarta.ws.rs.client.ClientBuilder;
+import jakarta.ws.rs.client.Entity;
+import jakarta.ws.rs.client.WebTarget;
+import jakarta.ws.rs.core.MediaType;
 
-import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class UsuarioDAO {
-    private Connection connection;
 
-    public UsuarioDAO(Connection connection) {
-        this.connection = connection;
+    private final WebTarget webTarget;
+
+    public UsuarioDAO() {
+        Client client = ClientBuilder.newClient();
+        this.webTarget = client.target("http://localhost:8081/api/usuarios/");
     }
 
-    public List<Usuario> obtenerTodoUsuario() {
+    public Usuario getUsuario(int id) {
+        String path = id + "/get";
+        return webTarget.path(path)
+                .request(MediaType.APPLICATION_JSON)
+                .get(Usuario.class);
+    }
+
+    public Usuario findByNombreExacto(String nombre) {
+        String path = nombre + "/getn";
+        return webTarget.path(path)
+                .request(MediaType.APPLICATION_JSON)
+                .get(Usuario.class);
+    }
+
+
+    public List<Usuario> findAll() throws JsonProcessingException {
+        String path = "getAll";
+        String json = webTarget.path(path).request(MediaType.APPLICATION_JSON).get(String.class);
+
         List<Usuario> usuarios = new ArrayList<>();
-        try {
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM usuario");
-            while (resultSet.next()) {
-                Usuario usuario = new Usuario(resultSet);
-                usuarios.add(usuario);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        if (json.length() > 4) {
+            ObjectMapper mapper = new ObjectMapper();
+            mapper.registerModule(new JavaTimeModule());
+            CollectionType setType = mapper.getTypeFactory().constructCollectionType(List.class, Usuario.class);
+            usuarios = mapper.readValue(json, setType);
+
+        } else {
+            usuarios = null;
         }
         return usuarios;
     }
 
-    public Usuario obtenerUsuarioPorId(int id) {
-        Usuario usuario = null;
-        try {
-            PreparedStatement statement = connection.prepareStatement(
-                    "SELECT * FROM usuario WHERE id = ?"
-            );
-            statement.setInt(1, id);
-            ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()) {
-                usuario = new Usuario(resultSet);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return usuario;
+
+    public Usuario findByEmail(String email) {
+        String path = email + "/getM";
+        return webTarget.path(path)
+                .request(MediaType.APPLICATION_JSON)
+                .get(Usuario.class);
     }
 
-    public void insertarUsuario(Usuario usuario) {
-        try {
-            PreparedStatement statement = connection.prepareStatement(
-                    "INSERT INTO usuario (usuario, pass, email, nacimiento, admin) VALUES (?, ?, ?, ?, ?)"
-            );
-            statement.setString(1, usuario.getUsername());
-            statement.setString(2, usuario.getPassword());
-            statement.setString(3, usuario.getEmail());
-            statement.setDate(4, Date.valueOf(usuario.getNacimiento()));
-            statement.setInt(5, usuario.isAdmin() ? 1 : 0);
-            statement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public Usuario register(Usuario user) {
+        String path = "/add";
+        return webTarget.path(path)
+                .request(MediaType.APPLICATION_JSON)
+                .post(Entity.entity(user, MediaType.APPLICATION_JSON), Usuario.class);
     }
 
-    public void actualizarUsuario(Usuario usuario) {
-        try {
-            PreparedStatement statement = connection.prepareStatement(
-                    "UPDATE usuario SET usuario = ?, pass = ?, email = ?, nacimiento = ?, admin = ? WHERE id = ?"
-            );
-            statement.setString(1, usuario.getUsername());
-            statement.setString(2, usuario.getPassword());
-            statement.setString(3, usuario.getEmail());
-            statement.setDate(4, Date.valueOf(usuario.getNacimiento()));
-            statement.setInt(5, usuario.isAdmin() ? 1 : 0);
-            statement.setInt(6, usuario.getId());
-            statement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void eliminarUsuario(int id) {
-        try {
-            PreparedStatement statement = connection.prepareStatement(
-                    "DELETE FROM usuario WHERE id = ?"
-            );
-            statement.setInt(1, id);
-            statement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
 }
