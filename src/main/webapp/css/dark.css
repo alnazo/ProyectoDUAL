@@ -46,3 +46,8 @@ body {
     --bs-modal-bg: var(--header-text) !important;
     --bs-modal-color: black !important;
 }
+
+
+.imgperfil > .perfilimg {
+    color: white;
+}

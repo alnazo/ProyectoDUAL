@@ -70,6 +70,13 @@ public class UsuarioDAO {
                 .post(Entity.entity(user, MediaType.APPLICATION_JSON), Usuario.class);
     }
 
+    public Usuario update(Usuario user){
+        String path = user.getId()+"/update";
+        return webTarget.path(path)
+                .request(MediaType.APPLICATION_JSON)
+                .put(Entity.entity(user, MediaType.APPLICATION_JSON), Usuario.class);
+    }
+
     public void delete(Usuario user){
 
     }

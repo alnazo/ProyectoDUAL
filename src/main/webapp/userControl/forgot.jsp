@@ -3,7 +3,7 @@
 <html lang="es">
     <head>
         <%@ include file="../parts/meta.jsp" %>
-        <title>Recordar contraseña - ProyectoDUAL</title>
+        <title>Recordar contraseña - Sharefy</title>
         <%@ include file="../parts/header.jsp" %>
     </head>
     <body class="container-fluid p-0">

@@ -17,7 +17,7 @@ Map<String, List<Servicio>> serviciosGruped = (Map<String, List<Servicio>>) sess
 <html lang="es">
     <head>
         <%@ include file="/parts/meta.jsp" %>
-        <title>Grupos - ProyectoDUAL</title>
+        <title>Grupos - Sharefy</title>
         <%@ include file="/parts/header.jsp" %>
     </head>
     <body>
@@ -91,11 +91,11 @@ Map<String, List<Servicio>> serviciosGruped = (Map<String, List<Servicio>>) sess
                                         <td><%= gr.calculate() %></td>
                                         <td>
                                             <% if (gr.getUser1().sourceImagen(context) != null){ %>
-                                                <a href="/user/@<%= gr.getUser1().getUsername() %>" >
+                                                <a href="/user/@<%= gr.getUser1().getUsername() %>" class="imgperfil">
                                                     <img src="<%= gr.getUser1().sourceImagen(context) %>" alt="imgprerfil" class="perfilimg"/>
                                                 </a>
                                             <% } else { %>
-                                                <a href="/user/@<%= gr.getUser1().getUsername() %>">
+                                                <a href="/user/@<%= gr.getUser1().getUsername() %>" class="imgperfil">
                                                     <i class="fas fa-user-circle fa-lg perfilimg"></i>
                                                 </a>
                                             <% } %>

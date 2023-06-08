@@ -4,7 +4,7 @@
 <html lang="es">
     <head>
         <%@ include file="../parts/meta.jsp" %>
-        <title>Inicio de sesión - ProyectoDUAL</title>
+        <title>Inicio de sesión - Sharefy</title>
         <%@ include file="../parts/header.jsp" %>
     </head>
     <body>

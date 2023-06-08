@@ -12,7 +12,7 @@ Usuario user = (Usuario) session.getAttribute("usuarioSesion");
 <html lang="es">
     <head>
         <%@ include file="/parts/meta.jsp" %>
-        <title>ProyectoDUAL</title>
+        <title>Sharefy</title>
         <%@ include file="/parts/header.jsp" %>
     </head>
     <body>
@@ -86,7 +86,7 @@ Usuario user = (Usuario) session.getAttribute("usuarioSesion");
                                            <%= tab.getMessage() %>
                                        </div>
                                        <div class="col-12 sublink">
-                                            <a id="<%= tab.getId() %>" href="">❤️<%= tab.getLikes() %></a>
+                                            <button class="btn" type="button" id="like-post-<%= tab.getId() %>" onclick="like('like-post-<%= tab.getId() %>')">❤️<%= tab.getLikes() %></button>
                                        </div>
                                    </div>
                                </div>

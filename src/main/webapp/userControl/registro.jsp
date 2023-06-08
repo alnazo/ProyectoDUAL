@@ -6,7 +6,7 @@
 <html lang="es">
     <head>
         <%@ include file="../parts/meta.jsp" %>
-        <title>Registro - ProyectoDUAL</title>
+        <title>Registro - Sharefy</title>
         <%@ include file="../parts/header.jsp" %>
     </head>
     <body>
@@ -19,7 +19,10 @@
                     <form action="registro" method="POST">
                         <div class="mb-3">
                             <label for="usuario" class="form-label">Nombre de usuario:</label>
-                            <input type="text" class="form-control" id="usuario" name="usuario">
+                            <div class="input-group">
+                                <div class="input-group-text">@</div>
+                                <input type="text" class="form-control" id="usuario" name="usuario">
+                            </div>
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">Email:</label>

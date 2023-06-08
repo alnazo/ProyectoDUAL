@@ -38,9 +38,46 @@ int size = (list!=null) ? list.size() : 0;
                                 <% }
                                 if (userSesion != null) {
                                 if (user.getId() == userSesion.getId()) { %>
-                                    <button type="button" class="btn btn-outline-dark" data-mdb-ripple-color="dark" style="z-index: 1;">
+                                    <button type="button" class="btn btn-outline-dark" data-mdb-ripple-color="dark" style="z-index: 1;" data-bs-toggle="modal" data-bs-target="#editarPerfil">
                                         Edit profile
                                     </button>
+
+                                    <div class="modal fade" id="editarPerfil" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="editarPerfilLabel" aria-hidden="true">
+                                      <div class="modal-dialog">
+                                        <div class="modal-content">
+                                        <form action="/user/@<%= user.getUsername() %>" method="POST" enctype="multipart/form-data">
+                                          <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="editarPerfilLabel">Editar perfil</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                          </div>
+                                          <div class="modal-body">
+                                            <div class="mb-3">
+                                                <label class="form-label" for="pass">Contraseña nueva:</label>
+                                                <input type="password" class="form-control" name="pass"/>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label" for="pass2">Repetir contraseña:</label>
+                                                <input type="password" class="form-control" name="pass2"/>
+                                            </div>
+                                            <div class="row mb-3 justify-content-between">
+                                                <label class="form-label" for="img">Cambiar imagen perfil:</label>
+                                                <div class="col-auto">
+                                                    <input type="file" accept="image/*" class="form-control" name="img"/>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <input type="button" class="btn btn-danger" value="Borrar">
+                                                </div>
+                                                <div id="fileHelp" class="form-text">Solo se admiten imagenes.</div>
+                                            </div>
+                                          </div>
+                                          <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                            <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                                          </div>
+                                        </div>
+                                        </form>
+                                      </div>
+                                    </div>
                                 <% } }%>
                             </div>
                             <div class="ms-3" style="margin-top: 130px;">
@@ -95,7 +132,7 @@ int size = (list!=null) ? list.size() : 0;
                                                 <%= tab.getMessage() %>
                                             </div>
                                             <div class="col-12 sublink">
-                                                <a id="<%= tab.getId() %>" href="">❤️<%= tab.getLikes() %></a>
+                                                <button class="btn" type="button" id="like-post-<%= tab.getId() %>" onclick="like('like-post-<%= tab.getId() %>')">❤️<%= tab.getLikes() %></button>
                                             </div>
                                         </div>
                                     <% } } else { %>

@@ -18,7 +18,7 @@ String paramMax = request.getParameter("max");
 <html lang="es">
     <head>
         <%@ include file="/parts/meta.jsp" %>
-        <title>Servicios - ProyectoDUAL</title>
+        <title>Servicios - Sharefy</title>
         <link rel="stylesheet" href="/css/formRangeSlider.css">
         <%@ include file="/parts/header.jsp" %>
 

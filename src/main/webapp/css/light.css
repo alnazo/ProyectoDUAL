@@ -33,3 +33,7 @@ body {
 .publicar{
     background-color: var(--header-back);
 }
+
+.imgperfil > .perfilimg {
+    color: black;
+}
