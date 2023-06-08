@@ -23,6 +23,12 @@ public class GrupoDAO {
         Client client = ClientBuilder.newClient();
         this.webTarget = client.target("http://localhost:8081/api/grupos/");
     }
+    public Grupo findById(int id) {
+        String path = id + "/get";
+        return webTarget.path(path)
+                .request(MediaType.APPLICATION_JSON)
+                .get(Grupo.class);
+    }
 
     public List<Grupo> getAll() throws JsonProcessingException {
         String path = "/getAll";
@@ -31,6 +37,7 @@ public class GrupoDAO {
         List<Grupo> grupos = new ArrayList<>();
         if (json.length() > 4) {
             ObjectMapper mapper = new ObjectMapper();
+            mapper.registerModule(new JavaTimeModule());
             CollectionType setType = mapper.getTypeFactory().constructCollectionType(List.class, Grupo.class);
             grupos = mapper.readValue(json, setType);
         }

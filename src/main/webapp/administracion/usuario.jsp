@@ -47,10 +47,10 @@
                                            <td><%=usuario.getImagen()%></td>
                                             <td><%=usuario.getNacimiento()%></td>
                                              <td><%=usuario.getAdmin()%></td>
-                                             <td><a href="" ><i class="fa-solid fa-pencil"></i></a></td>
+                                             <td><a href="" ><i class="fas fa-solid fa-pencil"></i></a></td>
                                              <td><form action="/admin/usuario" method="post" >
                                              <input type="text" hidden name="id" value="<%=usuario.getId()%>">
-                                             <button><i class="fa-regular fa-trash" ></i></button>
+                                             <button><i class="fas fa-regular fa-trash" ></i></button>
                                              </form>
                                              </td>
                                     </tr>

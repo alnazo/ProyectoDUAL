@@ -1,6 +1,7 @@
 package com.dual.proyectoDUAL.dao;
 
 import com.dual.proyectoDUAL.dto.Tablon;
+import com.dual.proyectoDUAL.dto.Usuario;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.CollectionType;
@@ -30,6 +31,7 @@ public class TablonDAO {
         String path = "getAll";
         String json = webTarget.path(path).request(MediaType.APPLICATION_JSON).get(String.class);
 
+
         List<Tablon> tablones = new ArrayList<>();
         if (json.length() > 4) {
             ObjectMapper mapper = new ObjectMapper();
@@ -44,7 +46,6 @@ public class TablonDAO {
                 Timestamp adjustedTimestamp = Timestamp.valueOf(localDateTime.atOffset(ZoneOffset.UTC).toLocalDateTime());
                 tablon.setCreateAt(adjustedTimestamp);
             }
-
 
         } else {
             tablones = null;
@@ -103,8 +104,22 @@ public class TablonDAO {
                 .post(Entity.entity(tab, MediaType.APPLICATION_JSON), Tablon.class);
     }
 
-    public void delete(Tablon tab){
+    public void delete(Tablon post){
+        String path = post.getId() + "/delete";
+        webTarget.path(path)
+                .request(MediaType.APPLICATION_JSON)
+                .delete();
 
     }
+
+    public void update(Tablon post){
+        post.setIdUsuario(new UsuarioDAO().getUsuario(11));
+        post.setMessage("Este es un mensaje borrado.");
+        String path = post.getId() + "/update";
+        webTarget.path(path)
+                .request(MediaType.APPLICATION_JSON)
+                .put(Entity.entity(post, MediaType.APPLICATION_JSON));
+    }
+
 
 }

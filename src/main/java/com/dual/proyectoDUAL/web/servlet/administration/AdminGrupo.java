@@ -24,9 +24,20 @@ public class AdminGrupo extends HttpServlet {
 
             req.getSession().setAttribute("grupo", grupos);
             req.getRequestDispatcher("/administracion/grupo.jsp").forward(req, resp);
+
         }catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int idGrupo= Integer.parseInt(req.getParameter("id"));
+        Grupo grupo = new GrupoDAO().findById(idGrupo);
+
+        new GrupoDAO().delete(grupo);
+
+        resp.sendRedirect("/admin/grupo");
     }
 
 

@@ -21,6 +21,12 @@
                             <div class="col-md-10">
                                 <h2>Administración</h2>
                             </div>
+                            <ul>
+                                <li><a href="admin/usuario">Usuarios</a></li>
+                                 <li><a href="admin/servicio">Servicios</a></li>
+                                  <li><a href="admin/tablon">Tablon</a></li>
+                                   <li><a href="admin/grupo">Grupos</a></li>
+                              </ul>
 
                         </div>
                     </div>

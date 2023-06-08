@@ -1,7 +1,9 @@
 package com.dual.proyectoDUAL.web.servlet.administration;
 
 import com.dual.proyectoDUAL.dao.ServicioDAO;
+import com.dual.proyectoDUAL.dao.UsuarioDAO;
 import com.dual.proyectoDUAL.dto.Servicio;
+import com.dual.proyectoDUAL.dto.Usuario;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -40,4 +42,15 @@ public class AdminServicio extends HttpServlet {
         }
         resp.sendRedirect("/admin/servicio");
     }
+
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Servicio servicio = new ServicioDAO().findById(Integer.parseInt(req.getParameter("id")));
+
+        new ServicioDAO().delete(servicio);
+
+        resp.sendRedirect("/admin/servicio");
+    }
+
+
 }

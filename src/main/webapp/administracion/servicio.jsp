@@ -80,8 +80,13 @@
                                          <td><%=servicio.getNombre()%></td>
                                          <td><%=servicio.getPlan()%></td>
                                          <td><%=servicio.getPrecio()%></td>
-                                          <td><a href="<%=servicio.getWeb()%>" target="blank"><%=servicio.getWeb()%></a></td>
-                                             <td><a href="" ><i class="fa-regular fa-trash"></i></a></td>
+                                         <td><a href="<%=servicio.getWeb()%>" target="blank"><%=servicio.getWeb()%></a></td>
+
+                                          <td><form action="/admin/servicio" method="delete" >
+                                          <input type="text" hidden name="id" value="<%=servicio.getId()%>">
+                                         <button><i class="fas fa-regular fa-trash" ></i></button>
+                                         </form>
+                                         </td>
                                     </tr>
                                 <% } %>
                                 </tbody>
