@@ -5,8 +5,10 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.RoundingMode;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 
 @Data
 @Builder
@@ -40,4 +42,40 @@ public class Grupo {
             e.printStackTrace();
         }
     }
+
+    public double calculate(){
+        DecimalFormat df = new DecimalFormat("0.00");
+        double res = this.servicio.getPrecio();
+        int contador = 0;
+
+        if (user1 != null) {
+            contador++;
+        }
+        if (user2 != null) {
+            contador++;
+        }
+        if (user3 != null) {
+            contador++;
+        }
+        if (user4 != null) {
+            contador++;
+        }
+        if (user5 != null) {
+            contador++;
+        }
+        if (user6 != null) {
+            contador++;
+        }
+        if (user7 != null) {
+            contador++;
+        }
+        if (user8 != null) {
+            contador++;
+        }
+        df.setRoundingMode(RoundingMode.UP);
+        res = res/contador;
+        df.format(res);
+        return res;
+    }
+
 }

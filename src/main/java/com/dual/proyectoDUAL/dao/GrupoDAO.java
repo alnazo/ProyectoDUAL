@@ -60,6 +60,26 @@ public class GrupoDAO {
         }
         return grupos;
     }
+    public Grupo getById(int id){
+        String path = id+"/get";
+        return webTarget.path(path)
+                .request(MediaType.APPLICATION_JSON)
+                .get(Grupo.class);
+    }
+
+    public Grupo create(Grupo grupo){
+        String path = "/add";
+        return webTarget.path(path)
+                .request(MediaType.APPLICATION_JSON)
+                .post(Entity.entity(grupo, MediaType.APPLICATION_JSON), Grupo.class);
+    }
+
+    public Grupo update(Grupo grupo){
+        String path = grupo.getId()+"/update";
+        return webTarget.path(path)
+                .request(MediaType.APPLICATION_JSON)
+                .put(Entity.entity(grupo, MediaType.APPLICATION_JSON), Grupo.class);
+    }
 
     public Grupo delete(Grupo grupo) {
         String path = "/delete";
