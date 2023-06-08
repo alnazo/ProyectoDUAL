@@ -5,6 +5,7 @@
 <%
 ServletContext context = (ServletContext) session.getAttribute("servletContext");
 Usuario user = (Usuario) session.getAttribute("userSearch");
+Usuario userSesion = (Usuario) session.getAttribute("usuarioSesion");
 List<Tablon> list = (List<Tablon>)session.getAttribute("userTablon");
 int size = (list!=null) ? list.size() : 0;
 %>
@@ -29,16 +30,18 @@ int size = (list!=null) ? list.size() : 0;
                             <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px;">
                                 <%
                                 if (user.sourceImagen(context) != null){ %>
-                                <img src="<%= user.sourceImagen(context) %>"
-                                alt="Imagen de <%=user.getUsername()%>"class="img-fluid img-thumbnail mt-4 mb-2"
-                                style="width: 150px; z-index: 1"/>
+                                    <img src="<%= user.sourceImagen(context) %>"
+                                        alt="Imagen de <%=user.getUsername()%>"class="img-fluid img-thumbnail mt-4 mb-2"
+                                        style="width: 150px; z-index: 1"/>
                                 <% } else { %>
-                                <i class="fas fa-user-circle fa-lg img-fluid img-thumbnail imgdefault mt-4 mb-2" style="width: 150px; z-index: 1"></i>
-                                <% } %>
-                                <button type="button" class="btn btn-outline-dark" data-mdb-ripple-color="dark"
-                                style="z-index: 1;">
-                                Edit profile
-                                </button>
+                                    <i class="fas fa-user-circle fa-lg img-fluid img-thumbnail imgdefault mt-4 mb-2" style="width: 150px; z-index: 1"></i>
+                                <% }
+                                if (userSesion != null) {
+                                if (user.getId() == userSesion.getId()) { %>
+                                    <button type="button" class="btn btn-outline-dark" data-mdb-ripple-color="dark" style="z-index: 1;">
+                                        Edit profile
+                                    </button>
+                                <% } }%>
                             </div>
                             <div class="ms-3" style="margin-top: 130px;">
                                 <h5>@<%= user.getUsername() %></h5>
@@ -65,12 +68,27 @@ int size = (list!=null) ? list.size() : 0;
                                     for (Tablon tab : list){
                                     %>
                                         <div class="row post mt-2 mb-2 pt-2 pb-2">
-                                            <div class="row col-12 datainfo">
-                                                <div class="sublink">
+                                            <div class="row col-12 datainfo justify-content-between">
+                                                <div class="sublink col-8">
                                                     <a href="/post/<%=tab.getId() %>" class="mainlink"><%=tab.getIdUsuario().getUsername()%></a>
                                                     <a href="/post/<%=tab.getId() %>" >@<%=tab.getIdUsuario().getUsername()%></a>
                                                     <spam>·<spam>
                                                     <a href="/post/<%=tab.getId()%>" title="<%= tab.getCreateAt() %>"><%= tab.timeAgo() %></a>
+                                                </div>
+                                                <div class="row col-1 text-end">
+                                                    <div class="col-1">
+                                                        <a class="copy" id="copy" onclick="copyLink('/post/<%=tab.getId() %>')" title="Copiar enlace"><i class="fas fa-share fa-sm"></i></a>
+                                                    </div>
+                                                <%
+                                                if (userSesion != null){
+                                                    if(tab.getIdUsuario().getId() == userSesion.getId()){
+                                                %>
+                                                    <div class="col-1">
+                                                        <form action="/post/delete/<%=tab.getId()%>" method="POST">
+                                                            <button class="trash btn" id="trash" type="submit" title="Eliminar mensaje"><i class="fas fa-trash-alt fa-sm"></i></button>
+                                                        </form>
+                                                    </div>
+                                                <% } } %>
                                                 </div>
                                             </div>
                                             <div class="col-12 message">
@@ -94,4 +112,5 @@ int size = (list!=null) ? list.size() : 0;
     </div>
     </body>
     <%@ include file="../parts/footer.jsp" %>
+    <script src="/js/tablon.js"></script>
 </html>

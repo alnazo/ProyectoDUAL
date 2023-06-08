@@ -68,14 +68,16 @@ Usuario user = (Usuario) session.getAttribute("usuarioSesion");
                                            </div>
                                            <div class="row col-1 text-end">
                                                 <div class="col-1">
-                                                    <a href="" title="Copiar enlace"><i class="fas fa-share fa-sm"></i></a>
+                                                    <a class="copy" id="copy" onclick="copyLink('/post/<%=tab.getId() %>')" title="Copiar enlace"><i class="fas fa-share fa-sm"></i></a>
                                                 </div>
                                                 <%
                                                 if (user != null){
                                                     if(tab.getIdUsuario().getId() == user.getId()){
                                                 %>
                                                 <div class="col-1">
-                                                    <a href="" ><i class="fas fa-trash-alt fa-sm"></i></a>
+                                                    <form action="/post/delete/<%=tab.getId()%>" method="POST">
+                                                        <button class="trash btn" id="trash" type="submit" title="Eliminar mensaje"><i class="fas fa-trash-alt fa-sm"></i></button>
+                                                    </form>
                                                 </div>
                                                 <% }} %>
                                            </div>
@@ -131,4 +133,6 @@ Usuario user = (Usuario) session.getAttribute("usuarioSesion");
     </body>
     <%@ include file="/parts/footer.jsp" %>
     <script src="/js/sendMenssage.js"></script>
+    <script src="/js/tablon.js"></script>
+
 </html>

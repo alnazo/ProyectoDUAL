@@ -78,8 +78,4 @@ public class Tablon implements Serializable {
         return "Hace: " + time;
     }
 
-    public void upLike(int id){
-        System.out.println(id);
-    }
-
 }

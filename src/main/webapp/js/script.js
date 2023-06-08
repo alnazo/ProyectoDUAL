@@ -37,6 +37,3 @@ $( function() {
         language: "es",
    });
 });
-
-
-

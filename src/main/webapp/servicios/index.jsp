@@ -2,6 +2,7 @@
 <%@ page import="com.dual.proyectoDUAL.web.notifications.Notificaciones" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Map" %>
+<%@ page import="java.net.URLEncoder" %>
 <%@ page import="com.dual.proyectoDUAL.dto.Servicio" %>
 
 

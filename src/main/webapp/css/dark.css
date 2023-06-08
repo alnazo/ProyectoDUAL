@@ -41,3 +41,8 @@ body {
  .publicar{
     background-color: var(--header-back);
  }
+
+.modal {
+    --bs-modal-bg: var(--header-text) !important;
+    --bs-modal-color: black !important;
+}
