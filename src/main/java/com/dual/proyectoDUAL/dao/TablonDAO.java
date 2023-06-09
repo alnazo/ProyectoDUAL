@@ -103,6 +103,13 @@ public class TablonDAO {
                 .post(Entity.entity(tab, MediaType.APPLICATION_JSON), Tablon.class);
     }
 
+    public Tablon updateLikes(Tablon tab){
+        String path = tab.getId()+"/likes";
+        return webTarget.path(path)
+                .request(MediaType.APPLICATION_JSON)
+                .put(Entity.entity(tab, MediaType.APPLICATION_JSON), Tablon.class);
+    }
+
     public void delete(Tablon tab) {
         String path = tab.getId() + "/delete";
         webTarget.path(path)

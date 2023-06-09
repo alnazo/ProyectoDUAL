@@ -13,7 +13,7 @@ int size = (list!=null) ? list.size() : 0;
 <html lang="es">
     <head>
         <%@ include file="../parts/meta.jsp" %>
-        <title>Perfil de @<%=user.getUsername()%></title>
+        <title>Sharefy - Perfil de @<%=user.getUsername()%></title>
         <%@ include file="../parts/header.jsp" %>
     </head>
     <body>
@@ -132,7 +132,10 @@ int size = (list!=null) ? list.size() : 0;
                                                 <%= tab.getMessage() %>
                                             </div>
                                             <div class="col-12 sublink">
-                                                <button class="btn" type="button" id="like-post-<%= tab.getId() %>" onclick="like('like-post-<%= tab.getId() %>')">❤️<%= tab.getLikes() %></button>
+                                                <form action="/like/post?actual=<%= tab.getLikes() %>" method="POST">
+                                                    <input hidden name="post" value="<%= tab.getId() %>" />
+                                                    <button class="btn" type="submit" id="like-post-<%= tab.getId() %>">❤️<%= tab.getLikes() %></button>
+                                                </form>
                                             </div>
                                         </div>
                                     <% } } else { %>

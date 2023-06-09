@@ -103,11 +103,11 @@ Map<String, List<Servicio>> serviciosGruped = (Map<String, List<Servicio>>) sess
                                         <% if(gr.getUser2() != null) { %>
                                             <td>
                                             <% if (gr.getUser2().sourceImagen(context) != null){ %>
-                                                <a href="/user/@<%= gr.getUser2().getUsername() %>">
+                                                <a href="/user/@<%= gr.getUser2().getUsername() %>" class="imgperfil">
                                                     <img src="<%= gr.getUser2().sourceImagen(context) %>" alt="imgprerfil" class="perfilimg"/>
                                                 </a>
                                             <% } else { %>
-                                                <a href="/user/@<%= gr.getUser2().getUsername() %>">
+                                                <a href="/user/@<%= gr.getUser2().getUsername() %>" class="imgperfil">
                                                     <i class="fas fa-user-circle fa-lg perfilimg"></i>
                                                 </a>
                                             <% } %>
@@ -124,11 +124,11 @@ Map<String, List<Servicio>> serviciosGruped = (Map<String, List<Servicio>>) sess
                                         <% if(gr.getUser3() != null) { %>
                                             <td>
                                             <% if (gr.getUser3().sourceImagen(context) != null){ %>
-                                                <a href="/user/@<%= gr.getUser3().getUsername() %>">
+                                                <a href="/user/@<%= gr.getUser3().getUsername() %>" class="imgperfil">
                                                     <img src="<%= gr.getUser3().sourceImagen(context) %>" alt="imgprerfil" class="perfilimg"/>
                                                 </a>
                                             <% } else { %>
-                                                <a href="/user/@<%= gr.getUser3().getUsername() %>">
+                                                <a href="/user/@<%= gr.getUser3().getUsername() %>" class="imgperfil">
                                                     <i class="fas fa-user-circle fa-lg perfilimg"></i>
                                                 </a>
                                             <% } %>
@@ -145,11 +145,11 @@ Map<String, List<Servicio>> serviciosGruped = (Map<String, List<Servicio>>) sess
                                         <% if(gr.getUser4() != null) { %>
                                             <td>
                                             <% if (gr.getUser4().sourceImagen(context) != null){ %>
-                                                <a href="/user/@<%= gr.getUser4().getUsername() %>">
+                                                <a href="/user/@<%= gr.getUser4().getUsername() %>" class="imgperfil">
                                                     <img src="<%= gr.getUser4().sourceImagen(context) %>" alt="imgprerfil" class="perfilimg"/>
                                                 </a>
                                             <% } else { %>
-                                                <a href="/user/@<%= gr.getUser4().getUsername() %>">
+                                                <a href="/user/@<%= gr.getUser4().getUsername() %>" class="imgperfil">
                                                     <i class="fas fa-user-circle fa-lg perfilimg"></i>
                                                 </a>
                                             <% } %>
@@ -166,11 +166,11 @@ Map<String, List<Servicio>> serviciosGruped = (Map<String, List<Servicio>>) sess
                                         <% if(gr.getUser5() != null) { %>
                                             <td>
                                             <% if (gr.getUser5().sourceImagen(context) != null){ %>
-                                                <a href="/user/@<%= gr.getUser5().getUsername() %>">
+                                                <a href="/user/@<%= gr.getUser5().getUsername() %>" class="imgperfil">
                                                     <img src="<%= gr.getUser5().sourceImagen(context) %>" alt="imgprerfil" class="perfilimg"/>
                                                 </a>
                                             <% } else { %>
-                                                <a href="/user/@<%= gr.getUser5().getUsername() %>">
+                                                <a href="/user/@<%= gr.getUser5().getUsername() %>" class="imgperfil">
                                                     <i class="fas fa-user-circle fa-lg perfilimg"></i>
                                                 </a>
                                             <% } %>
@@ -187,11 +187,11 @@ Map<String, List<Servicio>> serviciosGruped = (Map<String, List<Servicio>>) sess
                                         <% if(gr.getUser6() != null) { %>
                                             <td>
                                             <% if (gr.getUser6().sourceImagen(context) != null){ %>
-                                                <a href="/user/@<%= gr.getUser6().getUsername() %>">
+                                                <a href="/user/@<%= gr.getUser6().getUsername() %>" class="imgperfil">
                                                     <img src="<%= gr.getUser6().sourceImagen(context) %>" alt="imgprerfil" class="perfilimg"/>
                                                 </a>
                                             <% } else { %>
-                                                <a href="/user/@<%= gr.getUser6().getUsername() %>">
+                                                <a href="/user/@<%= gr.getUser6().getUsername() %>" class="imgperfil">
                                                     <i class="fas fa-user-circle fa-lg perfilimg"></i>
                                                 </a>
                                             <% } %>
@@ -208,11 +208,11 @@ Map<String, List<Servicio>> serviciosGruped = (Map<String, List<Servicio>>) sess
                                         <% if(gr.getUser7() != null) { %>
                                             <td>
                                             <% if (gr.getUser7().sourceImagen(context) != null){ %>
-                                                <a href="/user/@<%= gr.getUser7().getUsername() %>">
+                                                <a href="/user/@<%= gr.getUser7().getUsername() %>" class="imgperfil">
                                                     <img src="<%= gr.getUser7().sourceImagen(context) %>" alt="imgprerfil" class="perfilimg"/>
                                                 </a>
                                             <% } else { %>
-                                                <a href="/user/@<%= gr.getUser7().getUsername() %>">
+                                                <a href="/user/@<%= gr.getUser7().getUsername() %>" class="imgperfil">
                                                     <i class="fas fa-user-circle fa-lg perfilimg"></i>
                                                 </a>
                                             <% } %>
@@ -229,11 +229,11 @@ Map<String, List<Servicio>> serviciosGruped = (Map<String, List<Servicio>>) sess
                                         <% if(gr.getUser8() != null) { %>
                                             <td>
                                             <% if (gr.getUser8().sourceImagen(context) != null){ %>
-                                                <a href="/user/@<%= gr.getUser8().getUsername() %>">
+                                                <a href="/user/@<%= gr.getUser8().getUsername() %>" class="imgperfil">
                                                     <img src="<%= gr.getUser8().sourceImagen(context) %>" alt="imgprerfil" class="perfilimg"/>
                                                 </a>
                                             <% } else { %>
-                                                <a href="/user/@<%= gr.getUser8().getUsername() %>">
+                                                <a href="/user/@<%= gr.getUser8().getUsername() %>" class="imgperfil">
                                                     <i class="fas fa-user-circle fa-lg perfilimg"></i>
                                                 </a>
                                             <% } %>

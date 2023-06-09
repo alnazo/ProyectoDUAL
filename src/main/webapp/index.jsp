@@ -86,7 +86,10 @@ Usuario user = (Usuario) session.getAttribute("usuarioSesion");
                                            <%= tab.getMessage() %>
                                        </div>
                                        <div class="col-12 sublink">
-                                            <button class="btn" type="button" id="like-post-<%= tab.getId() %>" onclick="like('like-post-<%= tab.getId() %>')">❤️<%= tab.getLikes() %></button>
+                                            <form action="/like/post?actual=<%= tab.getLikes() %>" method="POST">
+                                                <input hidden name="post" value="<%= tab.getId() %>" />
+                                                <button class="btn" type="submit" id="like-post-<%= tab.getId() %>">❤️<%= tab.getLikes() %></button>
+                                            </form>
                                        </div>
                                    </div>
                                </div>
@@ -96,14 +99,6 @@ Usuario user = (Usuario) session.getAttribute("usuarioSesion");
                             %>
                                 <div>No hay nada que mostar</div>
                             <% } %>
-                        </div>
-                        <div class="col-md-2 text-center">
-                            <div>
-                                OTROS
-                            </div>
-                            <div>
-                                SERVICIOS
-                            </div>
                         </div>
                     </div>
                 </div>

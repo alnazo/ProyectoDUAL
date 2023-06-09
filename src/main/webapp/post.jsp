@@ -10,7 +10,7 @@
 <html lang="es">
     <head>
         <%@ include file="/parts/meta.jsp" %>
-        <title>Sharefy - Mensaje de <%= tab.getIdUsuario().getUsername() %></title>
+        <title>Sharefy - Mensaje de @<%= tab.getIdUsuario().getUsername() %></title>
         <%@ include file="/parts/header.jsp" %>
     </head>
     <body>
@@ -60,8 +60,11 @@
                                        <%= tab.getMessage() %>
                                    </div>
                                    <div class="col-12 sublink">
-                                        <button class="btn" type="button" id="like-post-<%= tab.getId() %>" onclick="like('like-post-<%= tab.getId() %>')">❤️<%= tab.getLikes() %></button>
-                                   </div>
+                                        <form action="/like/post?actual=<%= tab.getLikes() %>" method="POST">
+                                            <input hidden name="post" value="<%= tab.getId() %>" />
+                                            <button class="btn" type="submit" id="like-post-<%= tab.getId() %>">❤️<%= tab.getLikes() %></button>
+                                        </form>
+                                    </div>
                                </div>
                            </div>
                         </div>
