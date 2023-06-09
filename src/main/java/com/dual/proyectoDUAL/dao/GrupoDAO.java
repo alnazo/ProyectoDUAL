@@ -23,6 +23,12 @@ public class GrupoDAO {
         Client client = ClientBuilder.newClient();
         this.webTarget = client.target("http://localhost:8081/api/grupos/");
     }
+    public Grupo findById(int id) {
+        String path = id + "/get";
+        return webTarget.path(path)
+                .request(MediaType.APPLICATION_JSON)
+                .get(Grupo.class);
+    }
 
     public List<Grupo> getAll() throws JsonProcessingException {
         String path = "/getAll";
@@ -38,6 +44,26 @@ public class GrupoDAO {
         return grupos;
     }
 
+    public Grupo getById(int id){
+        String path = id+"/get";
+        return webTarget.path(path)
+                .request(MediaType.APPLICATION_JSON)
+                .get(Grupo.class);
+    }
+
+    public Grupo create(Grupo grupo){
+        String path = "/add";
+        return webTarget.path(path)
+                .request(MediaType.APPLICATION_JSON)
+                .post(Entity.entity(grupo, MediaType.APPLICATION_JSON), Grupo.class);
+    }
+
+    public Grupo update(Grupo grupo){
+        String path = grupo.getId()+"/update";
+        return webTarget.path(path)
+                .request(MediaType.APPLICATION_JSON)
+                .put(Entity.entity(grupo, MediaType.APPLICATION_JSON), Grupo.class);
+    }
     public Grupo getById(int id){
         String path = id+"/get";
         return webTarget.path(path)

@@ -45,18 +45,21 @@
                                     for(Grupo grupo:grupos){
                                 %>
                                     <tr>
-                                        <td><%=grupos.getId()%></td>
-                                         <td><%=grupos.getServicio()%></td>
-                                          <td><%=grupos.getUser1()%></td>
-                                           <td><%=grupos.getUser2()%></td>
-                                            <td><%=grupos.getUser3()%></td>
-                                             <td><%=grupos.getUser4()%></td>
-                                             <td><%=grupos.getUser5()%></td>
-                                             <td><%=grupos.getUser6()%></td>
-                                             <td><%=grupos.getUser7()%></td>
-                                             <td><%=grupos.getUser8()%></td>
-                                             <td><a href="" ><i clasgruposs="fa-solid fa-pencil"></i></a></td>
-                                             <td><a href="" ><i class="fa-regular fa-trash"></i></a></td>
+                                        <td><%=grupo.getId()%></td>
+                                         <td><%=grupo.getServicio()%></td>
+                                          <td><%=grupo.getUser1()%></td>
+                                           <td><%=grupo.getUser2()%></td>
+                                            <td><%=grupo.getUser3()%></td>
+                                             <td><%=grupo.getUser4()%></td>
+                                             <td><%=grupo.getUser5()%></td>
+                                             <td><%=grupo.getUser6()%></td>
+                                             <td><%=grupo.getUser7()%></td>
+                                             <td><%=grupo.getUser8()%></td>
+                                             <td><form action="/admin/grupo" method="post" >
+                                             <input type="text" hidden name="id" value="<%=grupo.getId()%>">
+                                             <button><i class="fas fa-regular fa-trash" ></i></button>
+                                             </form>
+                                             </td>
                                     </tr>
                                 <% } %>
                                 </tbody>

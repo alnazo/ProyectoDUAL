@@ -5,12 +5,10 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.lang.reflect.Method;
 import java.math.RoundingMode;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
-import java.util.Arrays;
 
 @Data
 @Builder
@@ -31,9 +29,9 @@ public class Grupo {
     public Grupo(ResultSet result){
         try  {
             this.id = result.getInt("id");
-            this.servicio = (Servicio) result.getObject("servicio");
+           this.servicio = (Servicio) result.getObject("servicio");
             this.user1 = (Usuario) result.getObject("user1");
-            this.user2 = (Usuario) result.getObject("user2");
+            this.user2 =(Usuario) result.getObject("user2");
             this.user3 = (Usuario) result.getObject("user3");
             this.user4 = (Usuario) result.getObject("user4");
             this.user5 = (Usuario) result.getObject("user5");

@@ -78,6 +78,10 @@ public class UsuarioDAO {
     }
 
     public void delete(Usuario user){
+        String path = user.getId() + "/delete";
+        webTarget.path(path)
+                .request(MediaType.APPLICATION_JSON)
+                .delete();
 
     }
 

@@ -30,4 +30,8 @@ public class CrearGrupoServlet extends HttpServlet {
         resp.sendRedirect("/grupos");
 
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> main
