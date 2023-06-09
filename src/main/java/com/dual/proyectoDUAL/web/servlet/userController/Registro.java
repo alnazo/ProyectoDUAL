@@ -2,6 +2,7 @@ package com.dual.proyectoDUAL.web.servlet.userController;
 
 import com.dual.proyectoDUAL.dao.UsuarioDAO;
 import com.dual.proyectoDUAL.dto.Usuario;
+import com.dual.proyectoDUAL.mail.Sender;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -48,6 +49,7 @@ public class Registro extends HttpServlet {
                 Usuario registro = new UsuarioDAO().register(newUser);
 
                 if (registro != null) {
+                    new Sender().send("sharefy@sharefy.com",newUser.getEmail(), "Registro completo", "Bienvenido a Sharefy, esperamos que disfrute de nuestra plataforma y sus servicios.", "");
                     req.getRequestDispatcher("/userControl/login.jsp").forward(req, resp);
                 } else {
                     req.setAttribute("error", "Error, al crear usuario, si el error persiste, por favor contactenos.");
