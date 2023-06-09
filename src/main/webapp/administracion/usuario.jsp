@@ -7,15 +7,15 @@
 <!DOCTYPE html>
 <html lang="es">
     <head>
-        <%@ include file="../parts/meta.jsp" %>
+        <%@ include file="/parts/meta.jsp" %>
         <title>Administración de usuarios - ProyectoDUAL</title>
-        <%@ include file="../parts/header.jsp" %>
+        <%@ include file="/parts/header.jsp" %>
     </head>
     <body>
         <div class="container-fluid">
             <div class="row">
                 <div class="col-2 menu">
-                    <%@ include file="../parts/nav.jsp" %>
+                    <%@ include file="/parts/nav.jsp" %>
                 </div>
                 <div class="col-10 content">
                     <div class="container">
@@ -23,6 +23,12 @@
                             <div class="col-md-10">
                                 <h2>Administración de usuarios</h2>
                             </div>
+                            <ul class="nav mb-3">
+                                <li class="nav-item"><a class="nav-link link" href="/admin/usuario">Usuarios</a></li>
+                                <li class="nav-item"><a class="nav-link link" href="/admin/servicio">Servicios</a></li>
+                                <li class="nav-item"><a class="nav-link link" href="/admin/tablon">Tablon</a></li>
+                                <li class="nav-item"><a class="nav-link link" href="/admin/grupo">Grupos</a></li>
+                            </ul>
                                <table class="usuarios-table">
                                     <thead>
                                         <tr>
@@ -47,7 +53,7 @@
                                            <td><%=usuario.getImagen()%></td>
                                             <td><%=usuario.getNacimiento()%></td>
                                              <td><%=usuario.getAdmin()%></td>
-                                             <td><a href="" ><i class="fas fa-solid fa-pencil"></i></a></td>
+                                             <td><a href="" class="link" ><i class="fas fa-pencil-alt"></i></a></td>
                                              <td><form action="/admin/usuario" method="post" >
                                              <input type="text" hidden name="id" value="<%=usuario.getId()%>">
                                              <button><i class="fas fa-regular fa-trash" ></i></button>
@@ -62,5 +68,5 @@
             </div>
         </div>
         </body>
-    <%@ include file="../parts/footer.jsp" %>
+    <%@ include file="/parts/footer.jsp" %>
 </html>

@@ -7,15 +7,15 @@
 <!DOCTYPE html>
 <html lang="es">
     <head>
-        <%@ include file="../parts/meta.jsp" %>
+        <%@ include file="/parts/meta.jsp" %>
         <title>Administración de servicios - ProyectoDUAL</title>
-        <%@ include file="../parts/header.jsp" %>
+        <%@ include file="/parts/header.jsp" %>
     </head>
     <body>
         <div class="container-fluid">
             <div class="row">
                 <div class="col-2 menu">
-                    <%@ include file="../parts/nav.jsp" %>
+                    <%@ include file="/parts/nav.jsp" %>
                 </div>
                 <div class="col-10 content">
                     <div class="container">
@@ -23,6 +23,12 @@
                             <div class="col-md-10">
                                 <h2>Administración de servicios</h2>
                             </div>
+                            <ul class="nav mb-3">
+                                <li class="nav-item"><a class="nav-link link" href="/admin/usuario">Usuarios</a></li>
+                                <li class="nav-item"><a class="nav-link link" href="/admin/servicio">Servicios</a></li>
+                                <li class="nav-item"><a class="nav-link link" href="/admin/tablon">Tablon</a></li>
+                                <li class="nav-item"><a class="nav-link link" href="/admin/grupo">Grupos</a></li>
+                            </ul>
                             <div class="col-3 p-0" >
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                 Añadir servicio
@@ -96,5 +102,5 @@
             </div>
         </div>
         </body>
-    <%@ include file="../parts/footer.jsp" %>
+    <%@ include file="/parts/footer.jsp" %>
 </html>

@@ -24,14 +24,10 @@ public class CrearGrupoServlet extends HttpServlet {
         Usuario usersession = (Usuario)req.getSession().getAttribute("usuarioSesion");
 
         Servicio serv = new ServicioDAO().findBySP(servicio, plan);
-        Grupo grupo = new Grupo(0, serv, usersession, null, null, null, null, null, null, null);
-        new GrupoDAO().create(grupo);
+        Grupo grup = new Grupo(0, serv, usersession, null, null, null, null, null, null, null);
+        new GrupoDAO().create(grup);
 
         resp.sendRedirect("/grupos");
 
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> main

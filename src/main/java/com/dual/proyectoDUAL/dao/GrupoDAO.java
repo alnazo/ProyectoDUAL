@@ -11,6 +11,7 @@ import jakarta.ws.rs.client.ClientBuilder;
 import jakarta.ws.rs.client.Entity;
 import jakarta.ws.rs.client.WebTarget;
 import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,32 +65,12 @@ public class GrupoDAO {
                 .request(MediaType.APPLICATION_JSON)
                 .put(Entity.entity(grupo, MediaType.APPLICATION_JSON), Grupo.class);
     }
-    public Grupo getById(int id){
-        String path = id+"/get";
-        return webTarget.path(path)
-                .request(MediaType.APPLICATION_JSON)
-                .get(Grupo.class);
-    }
 
-    public Grupo create(Grupo grupo){
-        String path = "/add";
-        return webTarget.path(path)
+    public void delete(Grupo grupo) {
+        String path = grupo.getId() + "/delete";
+        webTarget.path(path)
                 .request(MediaType.APPLICATION_JSON)
-                .post(Entity.entity(grupo, MediaType.APPLICATION_JSON), Grupo.class);
-    }
-
-    public Grupo update(Grupo grupo){
-        String path = grupo.getId()+"/update";
-        return webTarget.path(path)
-                .request(MediaType.APPLICATION_JSON)
-                .put(Entity.entity(grupo, MediaType.APPLICATION_JSON), Grupo.class);
-    }
-
-    public Grupo delete(Grupo grupo) {
-        String path = "/delete";
-        return webTarget.path(path)
-                .request(MediaType.APPLICATION_JSON)
-                .post(Entity.entity(grupo, MediaType.APPLICATION_JSON), Grupo.class);
+                .delete();
     }
 
 
