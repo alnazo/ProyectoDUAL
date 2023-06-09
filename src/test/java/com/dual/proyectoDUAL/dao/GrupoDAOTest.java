@@ -36,7 +36,7 @@ public class GrupoDAOTest {
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-        grupoDAO = new GrupoDAO(mockConnection);
+        //grupoDAO = new GrupoDAO(mockConnection);
     }
 
     @Test
