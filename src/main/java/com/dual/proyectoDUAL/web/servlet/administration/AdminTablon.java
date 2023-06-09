@@ -32,9 +32,8 @@ public class AdminTablon extends HttpServlet {
         int idPost= Integer.parseInt(req.getParameter("id"));
         Tablon post = new TablonDAO().findById(idPost);
 
-        new TablonDAO().delete(post);
+        new TablonDAO().update(post);
 
         resp.sendRedirect("/admin/tablon");
     }
-
 }

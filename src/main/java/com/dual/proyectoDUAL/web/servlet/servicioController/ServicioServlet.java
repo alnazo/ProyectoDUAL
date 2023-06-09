@@ -42,4 +42,14 @@ public class ServicioServlet extends HttpServlet {
         req.getSession().setAttribute("servicios", servicios);
         req.getRequestDispatcher("/servicios/index.jsp").forward(req, resp);
     }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Servicio servicio = new ServicioDAO().findById(Integer.parseInt(req.getParameter("id")));
+
+        new ServicioDAO().delete(servicio);
+
+        resp.sendRedirect("/admin/servicio");
+    }
+
 }

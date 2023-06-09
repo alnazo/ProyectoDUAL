@@ -1,6 +1,7 @@
 package com.dual.proyectoDUAL.dao;
 
 import com.dual.proyectoDUAL.dto.Servicio;
+import com.dual.proyectoDUAL.dto.Tablon;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.CollectionType;
@@ -11,6 +12,9 @@ import jakarta.ws.rs.client.Entity;
 import jakarta.ws.rs.client.WebTarget;
 import jakarta.ws.rs.core.MediaType;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +26,22 @@ public class ServicioDAO {
         Client client = ClientBuilder.newClient();
         this.webTarget = client.target("http://localhost:8081/api/servicios/");
     }
+
+    public Servicio findById(int id) throws JsonProcessingException {
+        Servicio sv = null;
+
+        String path = id + "/get";
+        String json = webTarget.path(path).request(MediaType.APPLICATION_JSON).get(String.class);
+        if (json.length() > 4) {
+            ObjectMapper mapper = new ObjectMapper();
+            mapper.registerModule(new JavaTimeModule());
+            sv = mapper.readValue(json, Servicio.class);
+
+        }
+
+        return sv;
+    }
+
 
     public List<Servicio> getAll() throws JsonProcessingException {
         String path = "/getAll";
@@ -84,5 +104,13 @@ public class ServicioDAO {
         return webTarget.path(path)
                 .request(MediaType.APPLICATION_JSON)
                 .post(Entity.entity(servicio, MediaType.APPLICATION_JSON), Servicio.class);
+    }
+
+    public void delete(Servicio servicio){
+        String path = servicio.getId() + "/delete";
+        webTarget.path(path)
+                .request(MediaType.APPLICATION_JSON)
+                .delete();
+
     }
 }
