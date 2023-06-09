@@ -1,6 +1,6 @@
 package com.dual.proyectoDUAL.email;
 
-import com.dual.proyectoDUAL.dao.email.sender.Sender;
+import com.dual.proyectoDUAL.mail.Sender;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;

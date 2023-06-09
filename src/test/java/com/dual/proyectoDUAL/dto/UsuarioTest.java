@@ -6,7 +6,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
-import javax.servlet.ServletContext;
+import jakarta.servlet.ServletContext;
 import java.io.File;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -48,7 +48,7 @@ public class UsuarioTest {
         assertEquals("lau.cg@gmail.com", usuario.getEmail());
         assertEquals("lauImagen.jpg", usuario.getImagen());
         assertEquals(LocalDate.now(), usuario.getNacimiento());
-        assertTrue(usuario.isAdmin());
+        assertTrue(usuario.getAdmin());
     }
 
     //TODO REVISAR ESTOS TEST
