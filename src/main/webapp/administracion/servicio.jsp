@@ -82,7 +82,7 @@
                                          <td><%=servicio.getPrecio()%></td>
                                          <td><a href="<%=servicio.getWeb()%>" target="blank"><%=servicio.getWeb()%></a></td>
 
-                                          <td><form action="/admin/servicio" method="delete" >
+                                          <td><form action="/servicios" method="post" >
                                           <input type="text" hidden name="id" value="<%=servicio.getId()%>">
                                          <button><i class="fas fa-regular fa-trash" ></i></button>
                                          </form>

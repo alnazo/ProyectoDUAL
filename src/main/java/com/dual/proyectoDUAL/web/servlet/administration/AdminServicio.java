@@ -43,14 +43,6 @@ public class AdminServicio extends HttpServlet {
         resp.sendRedirect("/admin/servicio");
     }
 
-    @Override
-    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Servicio servicio = new ServicioDAO().findById(Integer.parseInt(req.getParameter("id")));
-
-        new ServicioDAO().delete(servicio);
-
-        resp.sendRedirect("/admin/servicio");
-    }
 
 
 }
